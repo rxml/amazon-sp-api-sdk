@@ -113,18 +113,3 @@ $asin = 'B0002ZFTJA';
 $result = $apiInstance->getCatalogItem($marketplace_id, $asin);
 echo $result->getPayload()->getAttributeSets()[0]->getTitle(); // Never Gonna Give You Up [Vinyl Single]
 ```
-
-# ToDo
-
-- Implement Tests
-- Improve documentation
-
-Feature Requests & Pull Requests are very welcome!
-
-# Notes
-
-If you are looking for a complete Repricing & FBA-Reimbursement solution, you might want to consider giving [ClouSale.com](https://www.clousale.com) a shot.
-
-# Thanks
-
-Thanks go out to everybody who added PRs and worked on this package.

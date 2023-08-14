@@ -6,14 +6,15 @@
         "amazon",
         "selling-partner",
         "sp-api",
+        "clousale",
         "sdk"
     ],
-    "homepage": "http://www.clousale.com",
+    "homepage": "https://github.com/rxml/amazon-sp-api-sdk",
     "license": "MIT",
     "authors": [
         {
-            "name": "ClouSale",
-            "homepage": "https://www.clousale.com"
+            "name": "Rxml",
+            "homepage": "https://github.com/rxml/amazon-sp-api-sdk"
         }
     ],
     "require": {
