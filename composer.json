@@ -13,8 +13,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Rxml",
-            "homepage": "https://github.com/rxml/amazon-sp-api-sdk"
+            "name": "rxml",
+            "email": "352242180@qq.com"
         }
     ],
     "require": {
@@ -32,8 +32,5 @@
     },
     "autoload": {
         "psr-4": { "ClouSale\\AmazonSellingPartnerAPI\\" : "lib/" }
-    },
-    "autoload-dev": {
-        "psr-4": { "ClouSale\\AmazonSellingPartnerAPI\\" : "test/" }
     }
 }
