@@ -46,7 +46,7 @@ class CreateFeedResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'feed_id' => 'string'];
+        'feedId' => 'string'];
 
     /**
      * Array of property to format mappings. Used for (de)serialization.
@@ -54,7 +54,7 @@ class CreateFeedResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'feed_id' => null];
+        'feedId' => null];
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -83,7 +83,7 @@ class CreateFeedResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'feed_id' => 'feed_id'];
+        'feedId' => 'feedId'];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
@@ -91,7 +91,7 @@ class CreateFeedResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'feed_id' => 'setFeedId'];
+        'feedId' => 'setFeedId'];
 
     /**
      * Array of attributes to getter functions (for serialization of requests).
@@ -99,7 +99,7 @@ class CreateFeedResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'feed_id' => 'getFeedId'];
+        'feedId' => 'getFeedId'];
 
     /**
      * Array of attributes where the key is the local name,
@@ -157,7 +157,7 @@ class CreateFeedResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['feed_id'] = isset($data['feed_id']) ? $data['feed_id'] : null;
+        $this->container['feedId'] = isset($data['feedId']) ? $data['feedId'] : null;
     }
 
     /**
@@ -190,7 +190,7 @@ class CreateFeedResponse implements ModelInterface, ArrayAccess
      */
     public function getFeedId()
     {
-        return $this->container['feed_id'];
+        return $this->container['feedId'];
     }
 
     /**
@@ -200,9 +200,9 @@ class CreateFeedResponse implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setFeedId($feed_id)
+    public function setFeedId($feedId)
     {
-        $this->container['feed_id'] = $feed_id;
+        $this->container['feedId'] = $feedId;
 
         return $this;
     }

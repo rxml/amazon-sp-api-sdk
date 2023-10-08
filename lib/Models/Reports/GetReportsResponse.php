@@ -47,7 +47,7 @@ class GetReportsResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerTypes = [
         'reports' => '\ClouSale\AmazonSellingPartnerAPI\Models\Reports\ReportList',
-        'next_token' => 'string',
+        'nextToken' => 'string',
     ];
 
     /**
@@ -57,7 +57,7 @@ class GetReportsResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'reports' => null,
-        'next_token' => null,
+        'nextToken' => null,
     ];
 
     /**
@@ -88,7 +88,7 @@ class GetReportsResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'reports' => 'reports',
-        'next_token' => 'nextToken',
+        'nextToken' => 'nextToken',
     ];
 
     /**
@@ -98,7 +98,7 @@ class GetReportsResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'reports' => 'setReports',
-        'next_token' => 'setNextToken',
+        'nextToken' => 'setNextToken',
     ];
 
     /**
@@ -108,7 +108,7 @@ class GetReportsResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'reports' => 'getReports',
-        'next_token' => 'getNextToken',
+        'nextToken' => 'getNextToken',
     ];
 
     /**
@@ -168,7 +168,7 @@ class GetReportsResponse implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['reports'] = isset($data['reports']) ? $data['reports'] : null;
-        $this->container['next_token'] = isset($data['next_token']) ? $data['next_token'] : null;
+        $this->container['nextToken'] = isset($data['nextToken']) ? $data['nextToken'] : null;
     }
 
     /**
@@ -219,25 +219,25 @@ class GetReportsResponse implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets next_token.
+     * Gets nextToken.
      *
      * @return string
      */
     public function getNextToken()
     {
-        return $this->container['next_token'];
+        return $this->container['nextToken'];
     }
 
     /**
-     * Sets next_token.
+     * Sets nextToken.
      *
-     * @param string $next_token Returned when the number of results exceeds pageSize. To get the next page of results, call getReports with this token as the only parameter.
+     * @param string $nextToken Returned when the number of results exceeds pageSize. To get the next page of results, call getReports with this token as the only parameter.
      *
      * @return $this
      */
-    public function setNextToken($next_token)
+    public function setNextToken($nextToken)
     {
-        $this->container['next_token'] = $next_token;
+        $this->container['nextToken'] = $nextToken;
 
         return $this;
     }

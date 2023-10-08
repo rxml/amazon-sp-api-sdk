@@ -46,7 +46,7 @@ class CreateReportResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'report_id' => 'string'];
+        'reportId' => 'string'];
 
     /**
      * Array of property to format mappings. Used for (de)serialization.
@@ -54,7 +54,7 @@ class CreateReportResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'report_id' => null];
+        'reportId' => null];
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -83,7 +83,7 @@ class CreateReportResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'report_id' => 'report_id'];
+        'reportId' => 'reportId'];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
@@ -91,7 +91,7 @@ class CreateReportResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'report_id' => 'setReportId'];
+        'reportId' => 'setReportId'];
 
     /**
      * Array of attributes to getter functions (for serialization of requests).
@@ -99,7 +99,7 @@ class CreateReportResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'report_id' => 'getReportId'];
+        'reportId' => 'getReportId'];
 
     /**
      * Array of attributes where the key is the local name,
@@ -157,7 +157,7 @@ class CreateReportResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['report_id'] = isset($data['report_id']) ? $data['report_id'] : null;
+        $this->container['reportId'] = isset($data['reportId']) ? $data['reportId'] : null;
     }
 
     /**
@@ -190,7 +190,7 @@ class CreateReportResponse implements ModelInterface, ArrayAccess
      */
     public function getReportId()
     {
-        return $this->container['report_id'];
+        return $this->container['reportId'];
     }
 
     /**
@@ -200,9 +200,9 @@ class CreateReportResponse implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setReportId($report_id)
+    public function setReportId($reportId)
     {
-        $this->container['report_id'] = $report_id;
+        $this->container['reportId'] = $reportId;
 
         return $this;
     }
