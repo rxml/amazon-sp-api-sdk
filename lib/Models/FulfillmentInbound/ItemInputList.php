@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateInboundPlanRequest.
+ * ItemInputList.
  *
  * PHP version 7
  *
@@ -18,18 +18,19 @@
 namespace ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound;
 
 use ArrayAccess;
+use ClouSale\AmazonSellingPartnerAPI\Models\IterableType;
 use ClouSale\AmazonSellingPartnerAPI\Models\ModelInterface;
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 
 /**
- * CreateInboundPlanRequest Class Doc Comment.
+ * ItemInputList Class Doc Comment.
  *
 
- * @description The request schema for the createInboundPlan operation.
+ * @description A list of inbound shipment information.
  *
  * @author   Stefan Neuhaus / ClouSale
  */
-class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
+class ItemInputList implements ModelInterface, ArrayAccess, IterableType
 {
     const DISCRIMINATOR = null;
 
@@ -38,7 +39,7 @@ class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'CreateInboundPlanRequest';
+    protected static $swaggerModelName = 'ItemInputList';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -46,11 +47,7 @@ class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'destination_marketplaces' => 'string[]',
-        'name' => 'string',
-        'items' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ItemInputList',
-        'source_address' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\AddressInput',
-    ];
+            ];
 
     /**
      * Array of property to format mappings. Used for (de)serialization.
@@ -58,11 +55,7 @@ class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'destination_marketplaces' => null,
-        'name' => null,
-        'items' => null,
-        'source_address' => null,  
-    ];
+            ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -91,11 +84,7 @@ class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'destination_marketplaces' => 'destinationMarketplaces',
-        'name' => 'name',
-        'items' => 'items',
-        'source_address' => 'sourceAddress',   
-    ];
+            ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
@@ -103,11 +92,7 @@ class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'destination_marketplaces' => 'setDestinationMarketplaces',
-        'name' => 'setName',
-        'items' => 'setItems',
-        'source_address' => 'setSourceAddress',      
-    ];
+            ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests).
@@ -115,11 +100,7 @@ class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'destination_marketplaces' => 'getDestinationMarketplaces',
-        'name' => 'getName',
-        'items' => 'getItems',
-        'source_address' => 'getSourceAddress', 
-    ];
+            ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -177,10 +158,6 @@ class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['destination_marketplaces'] = isset($data['destination_marketplaces']) ? $data['destination_marketplaces'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['items'] = isset($data['items']) ? $data['items'] : null;
-        $this->container['source_address'] = isset($data['source_address']) ? $data['source_address'] : null;
     }
 
     /**
@@ -190,17 +167,7 @@ class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (null === $this->container['destination_marketplaces']) {
-            $invalidProperties[] = "'destination_marketplaces' can't be null";
-        }
-        if (null === $this->container['items']) {
-            $invalidProperties[] = "'items' can't be null";
-        }
-        if (null === $this->container['source_address']) {
-            $invalidProperties[] = "'source_address' can't be null";
-        }
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -214,56 +181,6 @@ class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-
-    public function getDestinationMarketplaces()
-    {
-        return $this->container['destination_marketplaces'];
-    }
-
-    public function setDestinationMarketplaces($destination_marketplaces)
-    {
-        $this->container['destination_marketplaces'] = $destination_marketplaces;
-
-        return $this;
-    }
-
-
-    public function getItems()
-    {
-        return $this->container['items'];
-    }
-
-    public function setItems($items)
-    {
-        $this->container['items'] = $items;
-
-        return $this;
-    }
-
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    public function getSourceAddress()
-    {
-        return $this->container['source_address'];
-    }
-
-    public function setSourceAddress($source_address)
-    {
-        $this->container['source_address'] = $source_address;
-
-        return $this;
     }
 
     /**
@@ -334,5 +251,10 @@ class CreateInboundPlanRequest implements ModelInterface, ArrayAccess
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+    public function getSubClass()
+    {
+        return ItemInput::class;
     }
 }

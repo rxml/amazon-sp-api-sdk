@@ -46,8 +46,8 @@ class ListInboundPlansResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'inbound_plans' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\InboundPlanSummary',
-        'pagination' => 'string',
+        'inbound_plans' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\InboundPlanSummaryList',
+        'pagination' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Pagination',
     ];
 
     /**

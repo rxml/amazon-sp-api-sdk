@@ -51,9 +51,9 @@ class GetInboundPlanResponse implements ModelInterface, ArrayAccess
         'marketplace_ids' => 'string[]',
         'name' => 'string',
         'inbound_plan_id' => 'string',
-        'packing_options' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\PackingOptionSummary',    
-        'placement_options' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\PlacementOptionSummary',    
-        'shipments' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ShipmentSummary',    
+        'packing_options' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\PackingOptionSummaryList',    
+        'placement_options' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\PlacementOptionSummaryList',    
+        'shipments' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ShipmentSummaryList',    
         'source_address' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\AddressInput', 
         'status' => 'string',
     ];
