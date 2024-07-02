@@ -140,6 +140,8 @@ trait SellingPartnerApiRequest
                 case 403:
                 case 401:
                 case 400:
+                case 204:
+                case 202:
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
