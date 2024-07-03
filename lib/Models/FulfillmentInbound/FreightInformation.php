@@ -1,6 +1,6 @@
 <?php
 /**
- * PackageGroupingInput.
+ * FreightInformation.
  *
  * PHP version 7
  *
@@ -8,11 +8,11 @@
  */
 
 /**
- * Selling Partner API for Reports.
+ * Selling Partner API for Fulfillment Inbound.
  *
- * The Selling Partner API for Reports lets you retrieve and manage a variety of reports that can help selling partners manage their businesses.
+ * The Selling Partner API for Fulfillment Inbound lets you create applications that create and update inbound shipments of inventory to Amazon's fulfillment network.
  *
- * OpenAPI spec version: 202406
+ * OpenAPI spec version: v202406
  */
 
 namespace ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound;
@@ -22,11 +22,11 @@ use ClouSale\AmazonSellingPartnerAPI\Models\ModelInterface;
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 
 /**
- * Report Class Doc Comment.
+ * Address Class Doc Comment.
  *
  * @author   Stefan Neuhaus / ClouSale
  */
-class PackageGroupingInput implements ModelInterface, ArrayAccess
+class FreightInformation implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -35,7 +35,7 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'PackageGroupingInput';
+    protected static $swaggerModelName = 'FreightInformation';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -43,9 +43,8 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'boxes' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\BoxInputList',
-        'packing_group_id' => 'string',
-        'shipment_id' => 'string',
+        'declared_value' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Currency',
+        'freight_class' => 'string',
     ];
 
     /**
@@ -54,9 +53,8 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'boxes' => null,
-        'packing_group_id' => null,   
-        'shipment_id' => null,   
+        'declared_value' => null,
+        'freight_class' => null,
     ];
 
     /**
@@ -86,9 +84,8 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'boxes' => 'boxes',
-        'packing_group_id' => 'packingGroupId',   
-        'shipment_id' => 'shipmentId',   
+        'declared_value' => 'declaredValue',
+        'freight_class' => 'freightClass',
     ];
 
     /**
@@ -97,9 +94,8 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'boxes' => 'setBoxes',
-        'packing_group_id' => 'setPackingGroupId',   
-        'shipment_id' => 'setShipmentId',       
+        'declared_value' => 'setDeclaredValue',
+        'freight_class' => 'setFreightClass',
     ];
 
     /**
@@ -108,9 +104,8 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'boxes' => 'getBoxes',
-        'packing_group_id' => 'getPackingGroupId',   
-        'shipment_id' => 'getShipmentId',  
+        'declared_value' => 'getDeclaredValue',
+        'freight_class' => 'getFreightClass',
     ];
 
     /**
@@ -168,10 +163,10 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      *                      initializing the model
      */
     public function __construct(array $data = null)
-    {    
-        $this->container['boxes'] = isset($data['boxes']) ? $data['boxes'] : null;
-        $this->container['packing_group_id'] = isset($data['packing_group_id']) ? $data['packing_group_id'] : null;
-        $this->container['shipment_id'] = isset($data['shipment_id']) ? $data['shipment_id'] : null;
+    {
+        $this->container['declared_value'] = isset($data['declared_value']) ? $data['declared_value'] : null;
+        $this->container['freight_class'] = isset($data['freight_class']) ? $data['freight_class'] : null;
+        
     }
 
     /**
@@ -182,11 +177,7 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (null === $this->container['boxes']) {
-            $invalidProperties[] = "'boxes' can't be null";
-        }
-
+        
         return $invalidProperties;
     }
 
@@ -201,41 +192,30 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
         return 0 === count($this->listInvalidProperties());
     }
 
-    public function getBoxes()
+    public function getDeclaredValue()
     {
-        return $this->container['boxes'];
+        return $this->container['declared_value'];
     }
 
-    public function setBoxes($boxes)
+    public function setDeclaredValue($declared_value)
     {
-        $this->container['boxes'] = $boxes;
+        $this->container['declared_value'] = $declared_value;
 
         return $this;
     }
 
-    public function getPackingGroupId()
+    public function getFreightClass()
     {
-        return $this->container['packing_group_id'];
+        return $this->container['freight_class'];
     }
 
-    public function setPackingGroupId($packing_group_id)
+    public function setFreightClass($freight_class)
     {
-        $this->container['packing_group_id'] = $packing_group_id;
-
-        return $this;
-    }
-    public function getShipmentId()
-    {
-        return $this->container['shipment_id'];
-    }
-
-    public function setShipmentId($shipment_id)
-    {
-        $this->container['shipment_id'] = $shipment_id;
+        $this->container['freight_class'] = $freight_class;
 
         return $this;
     }
-    
+
     /**
      * Returns true if offset exists. False otherwise.
      *

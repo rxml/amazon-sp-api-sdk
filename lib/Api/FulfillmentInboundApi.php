@@ -27,6 +27,9 @@ use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListPackingOption
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListPackingGroupItemsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ConfirmPackingOptionResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\SetPackingInformationResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GeneratePlacementOptionsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListPlacementOptionsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GenerateTransportationOptionsResponse;
 
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 use GuzzleHttp\Client;
@@ -297,19 +300,19 @@ class FulfillmentInboundApi
 
     public function setPackingInformation($inbound_plan_id, $body)
     {
-        list($response) = $this->setPackingInformationWithHttpInfo($inbound_plan_id,$body);
+        list($response) = $this->setPackingInformationWithHttpInfo($inbound_plan_id, $body);
 
         return $response;
     }
 
-    public function setPackingInformationWithHttpInfo($inbound_plan_id,$body)
+    public function setPackingInformationWithHttpInfo($inbound_plan_id, $body)
     {
-        $request = $this->setPackingInformationRequest($inbound_plan_id,$body);
+        $request = $this->setPackingInformationRequest($inbound_plan_id, $body);
 
         return $this->sendRequest($request, SetPackingInformationResponse::class);
     }
 
-    protected function setPackingInformationRequest($inbound_plan_id,$body)
+    protected function setPackingInformationRequest($inbound_plan_id, $body)
     {
         // verify the required parameter 'body' is set
         if (null === $inbound_plan_id) {
@@ -465,16 +468,81 @@ class FulfillmentInboundApi
 
     public function listPlacementOptions($inbound_plan_id, $page_size = null, $pagination_token = null)
     {
-        // list($response) = $this->listPlacementOptionsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
+        list($response) = $this->listPlacementOptionsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
 
-        // return $response;
+        return $response;
+    }
+
+    public function listPlacementOptionsWithHttpInfo($inbound_plan_id, $page_size = null, $pagination_token = null){
+        $request = $this->listPlacementOptionsRequest($inbound_plan_id, $page_size, $pagination_token);
+
+        return $this->sendRequest($request, ListPlacementOptionsResponse::class);
+    }
+
+    protected function listPlacementOptionsRequest($inbound_plan_id, $page_size = null, $pagination_token = null)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listPackingOptions');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/placementOptions';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function generatePlacementOptions($inbound_plan_id, $body)
     {
-        // list($response) = $this->generatePlacementOptionsWithHttpInfo($inbound_plan_id, $body);
+        list($response) = $this->generatePlacementOptionsWithHttpInfo($inbound_plan_id, $body);
 
-        // return $response;
+        return $response;
+    }
+
+    public function generatePlacementOptionsWithHttpInfo($inbound_plan_id, $body)
+    {
+        $request = $this->generatePlacementOptionsRequest($inbound_plan_id, $body);
+
+        return $this->sendRequest($request, GeneratePlacementOptionsResponse::class);
+    }
+
+    protected function generatePlacementOptionsRequest($inbound_plan_id, $body)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generatePlacementOptions');
+        }
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling generatePlacementOptions');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/packingOptions';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
     public function confirmPlacementOption($inbound_plan_id, $placement_option_id)
@@ -626,10 +694,43 @@ class FulfillmentInboundApi
 
     public function generateTransportationOptions($inbound_plan_id, $body)
     {
-        // list($response) = $this->generateTransportationOptionsWithHttpInfo($inbound_plan_id, $body);
+        list($response) = $this->generateTransportationOptionsWithHttpInfo($inbound_plan_id, $body);
 
-        // return $response;
+        return $response;
     }
+
+    public function generateTransportationOptionsWithHttpInfo($inbound_plan_id, $body)
+    {
+        $request = $this->generateTransportationOptionsRequest($inbound_plan_id, $body);
+
+        return $this->sendRequest($request, GenerateTransportationOptionsResponse::class);
+    }
+
+    protected function generateTransportationOptionsRequest($inbound_plan_id, $body)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generateTransportationOptions');
+        }
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling generateTransportationOptions');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/transportationOptions';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
+    }
+
 
     public function confirmTransportationOptions($inbound_plan_id, $body)
     {

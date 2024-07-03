@@ -1,6 +1,6 @@
 <?php
 /**
- * PackageGroupingInput.
+ * PalletInput.
  *
  * PHP version 7
  *
@@ -8,11 +8,11 @@
  */
 
 /**
- * Selling Partner API for Reports.
+ * Selling Partner API for Fulfillment Inbound.
  *
- * The Selling Partner API for Reports lets you retrieve and manage a variety of reports that can help selling partners manage their businesses.
+ * The Selling Partner API for Fulfillment Inbound lets you create applications that create and update inbound shipments of inventory to Amazon's fulfillment network.
  *
- * OpenAPI spec version: 202406
+ * OpenAPI spec version: v202406
  */
 
 namespace ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound;
@@ -22,11 +22,11 @@ use ClouSale\AmazonSellingPartnerAPI\Models\ModelInterface;
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 
 /**
- * Report Class Doc Comment.
+ * Address Class Doc Comment.
  *
  * @author   Stefan Neuhaus / ClouSale
  */
-class PackageGroupingInput implements ModelInterface, ArrayAccess
+class PalletInput implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -35,7 +35,7 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'PackageGroupingInput';
+    protected static $swaggerModelName = 'PalletInput';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -43,9 +43,10 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'boxes' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\BoxInputList',
-        'packing_group_id' => 'string',
-        'shipment_id' => 'string',
+        'dimensions' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\DimensionsInput',
+        'quantity' => 'string',
+        'stackability' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Stackability',
+        'weight' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\WeightInput',
     ];
 
     /**
@@ -54,9 +55,10 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'boxes' => null,
-        'packing_group_id' => null,   
-        'shipment_id' => null,   
+        'dimensions' => null,
+        'quantity' => null,
+        'stackability' => null,
+        'weight' => null,
     ];
 
     /**
@@ -86,9 +88,10 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'boxes' => 'boxes',
-        'packing_group_id' => 'packingGroupId',   
-        'shipment_id' => 'shipmentId',   
+        'dimensions' => 'dimensions',
+        'quantity' => 'quantity',
+        'stackability' => 'stackability',
+        'weight' => 'weight',
     ];
 
     /**
@@ -97,9 +100,10 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'boxes' => 'setBoxes',
-        'packing_group_id' => 'setPackingGroupId',   
-        'shipment_id' => 'setShipmentId',       
+        'dimensions' => 'setDimensions',
+        'quantity' => 'setQuantity',
+        'stackability' => 'setStackability',
+        'weight' => 'setWeight',
     ];
 
     /**
@@ -108,9 +112,10 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'boxes' => 'getBoxes',
-        'packing_group_id' => 'getPackingGroupId',   
-        'shipment_id' => 'getShipmentId',  
+        'dimensions' => 'getDimensions',
+        'quantity' => 'getQuantity',
+        'stackability' => 'getStackability',
+        'weight' => 'getWeight',
     ];
 
     /**
@@ -168,10 +173,12 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      *                      initializing the model
      */
     public function __construct(array $data = null)
-    {    
-        $this->container['boxes'] = isset($data['boxes']) ? $data['boxes'] : null;
-        $this->container['packing_group_id'] = isset($data['packing_group_id']) ? $data['packing_group_id'] : null;
-        $this->container['shipment_id'] = isset($data['shipment_id']) ? $data['shipment_id'] : null;
+    {
+        $this->container['dimensions'] = isset($data['dimensions']) ? $data['dimensions'] : null;
+        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        $this->container['stackability'] = isset($data['stackability']) ? $data['stackability'] : null;
+        $this->container['weight'] = isset($data['weight']) ? $data['weight'] : null;
+        
     }
 
     /**
@@ -182,11 +189,9 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (null === $this->container['boxes']) {
-            $invalidProperties[] = "'boxes' can't be null";
+        if (null === $this->container['quantity']) {
+            $invalidProperties[] = "'quantity' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -201,41 +206,54 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
         return 0 === count($this->listInvalidProperties());
     }
 
-    public function getBoxes()
+    public function getDimensions()
     {
-        return $this->container['boxes'];
+        return $this->container['dimensions'];
     }
 
-    public function setBoxes($boxes)
+    public function setDimensions($dimensions)
     {
-        $this->container['boxes'] = $boxes;
+        $this->container['dimensions'] = $dimensions;
 
         return $this;
     }
 
-    public function getPackingGroupId()
+    public function getQuantity()
     {
-        return $this->container['packing_group_id'];
+        return $this->container['quantity'];
     }
 
-    public function setPackingGroupId($packing_group_id)
+    public function setQuantity($quantity)
     {
-        $this->container['packing_group_id'] = $packing_group_id;
-
-        return $this;
-    }
-    public function getShipmentId()
-    {
-        return $this->container['shipment_id'];
-    }
-
-    public function setShipmentId($shipment_id)
-    {
-        $this->container['shipment_id'] = $shipment_id;
+        $this->container['quantity'] = $quantity;
 
         return $this;
     }
-    
+
+    public function getStackability()
+    {
+        return $this->container['stackability'];
+    }
+
+    public function setStackability($stackability)
+    {
+        $this->container['stackability'] = $stackability;
+
+        return $this;
+    }
+
+    public function getWeight()
+    {
+        return $this->container['weight'];
+    }
+
+    public function setWeight($weight)
+    {
+        $this->container['weight'] = $weight;
+
+        return $this;
+    }
+
     /**
      * Returns true if offset exists. False otherwise.
      *

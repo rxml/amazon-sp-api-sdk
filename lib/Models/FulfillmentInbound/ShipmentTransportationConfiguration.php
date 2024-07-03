@@ -1,6 +1,6 @@
 <?php
 /**
- * PackingOption.
+ * ShipmentTransportationConfiguration.
  *
  * PHP version 7
  *
@@ -26,7 +26,7 @@ use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
  *
  * @author   Stefan Neuhaus / ClouSale
  */
-class PackingOption implements ModelInterface, ArrayAccess
+class ShipmentTransportationConfiguration implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -35,7 +35,7 @@ class PackingOption implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'PackingOption';
+    protected static $swaggerModelName = 'ShipmentTransportationConfiguration';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -43,13 +43,12 @@ class PackingOption implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'discounts' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\IncentiveList',
-        'expiration' => '\DateTime',
-        'fees' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\IncentiveList',
-        'packing_groups' => 'string[]',
-        'packing_option_id' => 'string',
-        'status' => 'string',
-        'supported_shipping_configurations' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ShippingConfigurationList',
+        'contact_information' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ContactInformation',
+        'freight_information' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\FreightInformation',
+        'pallets' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\PalletInputList',
+        'ready_to_ship_window' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\WindowInput',
+        'shipment_id' => 'string',
+        
     ];
 
     /**
@@ -58,13 +57,11 @@ class PackingOption implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'discounts' => null,
-        'expiration' => 'date-time',
-        'fees' => null,
-        'packing_groups' => null,
-        'packing_option_id' => null,
-        'status' => null,
-        'supported_shipping_configurations' => null,
+        'contact_information' => null,
+        'freight_information' => null,
+        'pallets' => null,
+        'ready_to_ship_window' => null,
+        'shipment_id' => null,
     ];
 
     /**
@@ -94,13 +91,11 @@ class PackingOption implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'discounts' => 'discounts',
-        'expiration' => 'expiration',
-        'fees' => 'fees',
-        'packing_groups' => 'packingGroups',
-        'packing_option_id' => 'packingOptionId',
-        'status' => 'status',
-        'supported_shipping_configurations' => 'supportedShippingConfigurations',
+        'contact_information' => 'contactInformation',
+        'freight_information' => 'freightInformation',
+        'pallets' => 'pallets',
+        'ready_to_ship_window' => 'readyToShipWindow',
+        'shipment_id' => 'shipmentId',
     ];
 
     /**
@@ -109,13 +104,11 @@ class PackingOption implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'discounts' => 'setDiscounts',
-        'expiration' => 'setExpiration',
-        'fees' => 'setFees',
-        'packing_groups' => 'setPackingGroups',
-        'packing_option_id' => 'setPackingOptionId',
-        'status' => 'setStatus',
-        'supported_shipping_configurations' => 'setSupportedShippingConfigurations',    
+        'contact_information' => 'setContactInformation',
+        'freight_information' => 'setFreightInformation',
+        'pallets' => 'setPallets',
+        'ready_to_ship_window' => 'setReadyToShipWindow',
+        'shipment_id' => 'setShipmentId',  
     ];
 
     /**
@@ -124,13 +117,11 @@ class PackingOption implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'discounts' => 'getDiscounts',
-        'expiration' => 'getExpiration',
-        'fees' => 'getFees',
-        'packing_groups' => 'getPackingGroups',
-        'packing_option_id' => 'getPackingOptionId',
-        'status' => 'getStatus',
-        'supported_shipping_configurations' => 'getSupportedShippingConfigurations',   
+        'contact_information' => 'getContactInformation',
+        'freight_information' => 'getFreightInformation',
+        'pallets' => 'getPallets',
+        'ready_to_ship_window' => 'getReadyToShipWindow',
+        'shipment_id' => 'getShipmentId',  
     ];
 
     /**
@@ -189,13 +180,12 @@ class PackingOption implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {     
-        $this->container['discounts'] = isset($data['discounts']) ? $data['discounts'] : null;
-        $this->container['expiration'] = isset($data['expiration']) ? $data['expiration'] : null;
-        $this->container['fees'] = isset($data['fees']) ? $data['fees'] : null;
-        $this->container['packing_groups'] = isset($data['packing_groups']) ? $data['packing_groups'] : null;
-        $this->container['packing_option_id'] = isset($data['packing_option_id']) ? $data['packing_option_id'] : null;
-        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
-        $this->container['supported_shipping_configurations'] = isset($data['supported_shipping_configurations']) ? $data['supported_shipping_configurations'] : null;
+        $this->container['contact_information'] = isset($data['contact_information']) ? $data['contact_information'] : null;
+        $this->container['freight_information'] = isset($data['freight_information']) ? $data['freight_information'] : null;
+        $this->container['pallets'] = isset($data['pallets']) ? $data['pallets'] : null;
+        $this->container['ready_to_ship_window'] = isset($data['ready_to_ship_window']) ? $data['ready_to_ship_window'] : null;
+        $this->container['shipment_id'] = isset($data['shipment_id']) ? $data['shipment_id'] : null;
+        
     }
 
     /**
@@ -207,23 +197,11 @@ class PackingOption implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (null === $this->container['discounts']) {
-            $invalidProperties[] = "'discounts' can't be null";
+        if (null === $this->container['ready_to_ship_window']) {
+            $invalidProperties[] = "'ready_to_ship_window' can't be null";
         }
-        if (null === $this->container['fees']) {
-            $invalidProperties[] = "'fees' can't be null";
-        }
-        if (null === $this->container['packing_groups']) {
-            $invalidProperties[] = "'packing_groups' can't be null";
-        }
-        if (null === $this->container['packing_option_id']) {
-            $invalidProperties[] = "'packing_option_id' can't be null";
-        }
-        if (null === $this->container['status']) {
-            $invalidProperties[] = "'status' can't be null";
-        }
-        if (null === $this->container['supported_shipping_configurations']) {
-            $invalidProperties[] = "'supported_shipping_configurations' can't be null";
+        if (null === $this->container['shipment_id']) {
+            $invalidProperties[] = "'shipment_id' can't be null";
         }
 
         return $invalidProperties;
@@ -240,90 +218,66 @@ class PackingOption implements ModelInterface, ArrayAccess
         return 0 === count($this->listInvalidProperties());
     }
 
-    public function getDiscounts()
+    public function getContactInformation()
     {
-        return $this->container['discounts'];
+        return $this->container['contact_information'];
     }
 
-    public function setDiscounts($discounts)
+    public function setContactInformation($contact_information)
     {
-        $this->container['discounts'] = $discounts;
+        $this->container['contact_information'] = $contact_information;
 
         return $this;
     }
 
-    public function getExpiration()
+    public function getFreightInformation()
     {
-        return $this->container['expiration'];
+        return $this->container['freight_information'];
     }
 
-    public function setExpiration($expiration)
+    public function setFreightInformation($freight_information)
     {
-        $this->container['expiration'] = $expiration;
+        $this->container['freight_information'] = $freight_information;
 
         return $this;
     }
 
-    public function getFees()
+    public function getPallets()
     {
-        return $this->container['fees'];
+        return $this->container['pallets'];
     }
 
-    public function setFees($fees)
+    public function setPallets($pallets)
     {
-        $this->container['fees'] = $fees;
+        $this->container['pallets'] = $pallets;
 
         return $this;
     }
 
-    public function getPackingGroups()
+    public function getReadyToShipWindow()
     {
-        return $this->container['packing_groups'];
+        return $this->container['ready_to_ship_window'];
     }
 
-    public function setPackingGroups($packing_groups)
+    public function setReadyToShipWindow($ready_to_ship_window)
     {
-        $this->container['packing_groups'] = $packing_groups;
+        $this->container['ready_to_ship_window'] = $ready_to_ship_window;
 
         return $this;
     }
 
-    public function getPackingOptionId()
+    public function getShipmentId()
     {
-        return $this->container['packing_option_id'];
+        return $this->container['shipment_id'];
     }
 
-    public function setPackingOptionId($packing_option_id)
+    public function setShipmentId($shipment_id)
     {
-        $this->container['packing_option_id'] = $packing_option_id;
+        $this->container['shipment_id'] = $shipment_id;
 
         return $this;
     }
 
-    public function getSupportedShippingConfigurations()
-    {
-        return $this->container['supported_shipping_configurations'];
-    }
-
-    public function setSupportedShippingConfigurations($supported_shipping_configurations)
-    {
-        $this->container['supported_shipping_configurations'] = $supported_shipping_configurations;
-
-        return $this;
-    }
-
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    public function setStatus($status)
-    {
-        $this->container['status'] = $status;
-
-        return $this;
-    }
-    
     /**
      * Returns true if offset exists. False otherwise.
      *

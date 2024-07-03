@@ -1,6 +1,6 @@
 <?php
 /**
- * PackingOption.
+ * CustomPlacementInput.
  *
  * PHP version 7
  *
@@ -26,7 +26,7 @@ use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
  *
  * @author   Stefan Neuhaus / ClouSale
  */
-class PackingOption implements ModelInterface, ArrayAccess
+class CustomPlacementInput implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -35,7 +35,7 @@ class PackingOption implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'PackingOption';
+    protected static $swaggerModelName = 'CustomPlacementInput';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -43,13 +43,8 @@ class PackingOption implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'discounts' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\IncentiveList',
-        'expiration' => '\DateTime',
-        'fees' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\IncentiveList',
-        'packing_groups' => 'string[]',
-        'packing_option_id' => 'string',
-        'status' => 'string',
-        'supported_shipping_configurations' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ShippingConfigurationList',
+        'items' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ItemInputList',
+        'warehouse_id' => 'string',
     ];
 
     /**
@@ -58,13 +53,8 @@ class PackingOption implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'discounts' => null,
-        'expiration' => 'date-time',
-        'fees' => null,
-        'packing_groups' => null,
-        'packing_option_id' => null,
-        'status' => null,
-        'supported_shipping_configurations' => null,
+        'items' => null,
+        'warehouse_id' => null,   
     ];
 
     /**
@@ -94,13 +84,8 @@ class PackingOption implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'discounts' => 'discounts',
-        'expiration' => 'expiration',
-        'fees' => 'fees',
-        'packing_groups' => 'packingGroups',
-        'packing_option_id' => 'packingOptionId',
-        'status' => 'status',
-        'supported_shipping_configurations' => 'supportedShippingConfigurations',
+        'items' => 'items',
+        'warehouse_id' => 'warehouseId',   
     ];
 
     /**
@@ -109,13 +94,8 @@ class PackingOption implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'discounts' => 'setDiscounts',
-        'expiration' => 'setExpiration',
-        'fees' => 'setFees',
-        'packing_groups' => 'setPackingGroups',
-        'packing_option_id' => 'setPackingOptionId',
-        'status' => 'setStatus',
-        'supported_shipping_configurations' => 'setSupportedShippingConfigurations',    
+        'items' => 'setItems',
+        'warehouse_id' => 'setWarehouseId',   
     ];
 
     /**
@@ -124,13 +104,8 @@ class PackingOption implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'discounts' => 'getDiscounts',
-        'expiration' => 'getExpiration',
-        'fees' => 'getFees',
-        'packing_groups' => 'getPackingGroups',
-        'packing_option_id' => 'getPackingOptionId',
-        'status' => 'getStatus',
-        'supported_shipping_configurations' => 'getSupportedShippingConfigurations',   
+        'items' => 'getItems',
+        'warehouse_id' => 'getWarehouseId',    
     ];
 
     /**
@@ -188,14 +163,9 @@ class PackingOption implements ModelInterface, ArrayAccess
      *                      initializing the model
      */
     public function __construct(array $data = null)
-    {     
-        $this->container['discounts'] = isset($data['discounts']) ? $data['discounts'] : null;
-        $this->container['expiration'] = isset($data['expiration']) ? $data['expiration'] : null;
-        $this->container['fees'] = isset($data['fees']) ? $data['fees'] : null;
-        $this->container['packing_groups'] = isset($data['packing_groups']) ? $data['packing_groups'] : null;
-        $this->container['packing_option_id'] = isset($data['packing_option_id']) ? $data['packing_option_id'] : null;
-        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
-        $this->container['supported_shipping_configurations'] = isset($data['supported_shipping_configurations']) ? $data['supported_shipping_configurations'] : null;
+    {    
+        $this->container['items'] = isset($data['items']) ? $data['items'] : null;
+        $this->container['warehouse_id'] = isset($data['warehouse_id']) ? $data['warehouse_id'] : null;
     }
 
     /**
@@ -207,23 +177,12 @@ class PackingOption implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (null === $this->container['discounts']) {
-            $invalidProperties[] = "'discounts' can't be null";
+        if (null === $this->container['items']) {
+            $invalidProperties[] = "'items' can't be null";
         }
-        if (null === $this->container['fees']) {
-            $invalidProperties[] = "'fees' can't be null";
-        }
-        if (null === $this->container['packing_groups']) {
-            $invalidProperties[] = "'packing_groups' can't be null";
-        }
-        if (null === $this->container['packing_option_id']) {
-            $invalidProperties[] = "'packing_option_id' can't be null";
-        }
-        if (null === $this->container['status']) {
-            $invalidProperties[] = "'status' can't be null";
-        }
-        if (null === $this->container['supported_shipping_configurations']) {
-            $invalidProperties[] = "'supported_shipping_configurations' can't be null";
+
+        if (null === $this->container['warehouse_id']) {
+            $invalidProperties[] = "'warehouse_id' can't be null";
         }
 
         return $invalidProperties;
@@ -240,86 +199,26 @@ class PackingOption implements ModelInterface, ArrayAccess
         return 0 === count($this->listInvalidProperties());
     }
 
-    public function getDiscounts()
+    public function getItems()
     {
-        return $this->container['discounts'];
+        return $this->container['items'];
     }
 
-    public function setDiscounts($discounts)
+    public function setItems($items)
     {
-        $this->container['discounts'] = $discounts;
+        $this->container['items'] = $items;
 
         return $this;
     }
 
-    public function getExpiration()
+    public function getWarehouseId()
     {
-        return $this->container['expiration'];
+        return $this->container['warehouse_id'];
     }
 
-    public function setExpiration($expiration)
+    public function setWarehouseId($warehouse_id)
     {
-        $this->container['expiration'] = $expiration;
-
-        return $this;
-    }
-
-    public function getFees()
-    {
-        return $this->container['fees'];
-    }
-
-    public function setFees($fees)
-    {
-        $this->container['fees'] = $fees;
-
-        return $this;
-    }
-
-    public function getPackingGroups()
-    {
-        return $this->container['packing_groups'];
-    }
-
-    public function setPackingGroups($packing_groups)
-    {
-        $this->container['packing_groups'] = $packing_groups;
-
-        return $this;
-    }
-
-    public function getPackingOptionId()
-    {
-        return $this->container['packing_option_id'];
-    }
-
-    public function setPackingOptionId($packing_option_id)
-    {
-        $this->container['packing_option_id'] = $packing_option_id;
-
-        return $this;
-    }
-
-    public function getSupportedShippingConfigurations()
-    {
-        return $this->container['supported_shipping_configurations'];
-    }
-
-    public function setSupportedShippingConfigurations($supported_shipping_configurations)
-    {
-        $this->container['supported_shipping_configurations'] = $supported_shipping_configurations;
-
-        return $this;
-    }
-
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    public function setStatus($status)
-    {
-        $this->container['status'] = $status;
+        $this->container['warehouse_id'] = $warehouse_id;
 
         return $this;
     }

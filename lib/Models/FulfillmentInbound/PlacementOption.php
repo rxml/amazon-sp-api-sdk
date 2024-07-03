@@ -1,6 +1,6 @@
 <?php
 /**
- * PackingOption.
+ * PlacementOption.
  *
  * PHP version 7
  *
@@ -26,7 +26,7 @@ use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
  *
  * @author   Stefan Neuhaus / ClouSale
  */
-class PackingOption implements ModelInterface, ArrayAccess
+class PlacementOption implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -35,7 +35,7 @@ class PackingOption implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'PackingOption';
+    protected static $swaggerModelName = 'PlacementOption';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -46,10 +46,9 @@ class PackingOption implements ModelInterface, ArrayAccess
         'discounts' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\IncentiveList',
         'expiration' => '\DateTime',
         'fees' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\IncentiveList',
-        'packing_groups' => 'string[]',
-        'packing_option_id' => 'string',
+        'placement_option_id' => 'string',
+        'shipment_ids' => 'string[]',
         'status' => 'string',
-        'supported_shipping_configurations' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ShippingConfigurationList',
     ];
 
     /**
@@ -61,10 +60,9 @@ class PackingOption implements ModelInterface, ArrayAccess
         'discounts' => null,
         'expiration' => 'date-time',
         'fees' => null,
-        'packing_groups' => null,
-        'packing_option_id' => null,
+        'placement_option_id' => null,
+        'shipment_ids' => null,
         'status' => null,
-        'supported_shipping_configurations' => null,
     ];
 
     /**
@@ -97,10 +95,9 @@ class PackingOption implements ModelInterface, ArrayAccess
         'discounts' => 'discounts',
         'expiration' => 'expiration',
         'fees' => 'fees',
-        'packing_groups' => 'packingGroups',
-        'packing_option_id' => 'packingOptionId',
+        'placement_option_id' => 'placementOptionId',
+        'shipment_ids' => 'shipmentIds',
         'status' => 'status',
-        'supported_shipping_configurations' => 'supportedShippingConfigurations',
     ];
 
     /**
@@ -112,10 +109,9 @@ class PackingOption implements ModelInterface, ArrayAccess
         'discounts' => 'setDiscounts',
         'expiration' => 'setExpiration',
         'fees' => 'setFees',
-        'packing_groups' => 'setPackingGroups',
-        'packing_option_id' => 'setPackingOptionId',
-        'status' => 'setStatus',
-        'supported_shipping_configurations' => 'setSupportedShippingConfigurations',    
+        'placement_option_id' => 'setPlacementOptionId',
+        'shipment_ids' => 'setShipmentIds',
+        'status' => 'setStatus',    
     ];
 
     /**
@@ -127,10 +123,9 @@ class PackingOption implements ModelInterface, ArrayAccess
         'discounts' => 'getDiscounts',
         'expiration' => 'getExpiration',
         'fees' => 'getFees',
-        'packing_groups' => 'getPackingGroups',
-        'packing_option_id' => 'getPackingOptionId',
+        'placement_option_id' => 'getPlacementOptionId',
+        'shipment_ids' => 'getShipmentIds',
         'status' => 'getStatus',
-        'supported_shipping_configurations' => 'getSupportedShippingConfigurations',   
     ];
 
     /**
@@ -188,14 +183,13 @@ class PackingOption implements ModelInterface, ArrayAccess
      *                      initializing the model
      */
     public function __construct(array $data = null)
-    {     
+    {    
         $this->container['discounts'] = isset($data['discounts']) ? $data['discounts'] : null;
         $this->container['expiration'] = isset($data['expiration']) ? $data['expiration'] : null;
         $this->container['fees'] = isset($data['fees']) ? $data['fees'] : null;
-        $this->container['packing_groups'] = isset($data['packing_groups']) ? $data['packing_groups'] : null;
-        $this->container['packing_option_id'] = isset($data['packing_option_id']) ? $data['packing_option_id'] : null;
+        $this->container['placement_option_id'] = isset($data['placement_option_id']) ? $data['placement_option_id'] : null;
+        $this->container['shipment_ids'] = isset($data['shipment_ids']) ? $data['shipment_ids'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
-        $this->container['supported_shipping_configurations'] = isset($data['supported_shipping_configurations']) ? $data['supported_shipping_configurations'] : null;
     }
 
     /**
@@ -213,17 +207,14 @@ class PackingOption implements ModelInterface, ArrayAccess
         if (null === $this->container['fees']) {
             $invalidProperties[] = "'fees' can't be null";
         }
-        if (null === $this->container['packing_groups']) {
-            $invalidProperties[] = "'packing_groups' can't be null";
+        if (null === $this->container['placement_option_id']) {
+            $invalidProperties[] = "'placement_option_id' can't be null";
         }
-        if (null === $this->container['packing_option_id']) {
-            $invalidProperties[] = "'packing_option_id' can't be null";
+        if (null === $this->container['shipment_ids']) {
+            $invalidProperties[] = "'shipment_ids' can't be null";
         }
         if (null === $this->container['status']) {
             $invalidProperties[] = "'status' can't be null";
-        }
-        if (null === $this->container['supported_shipping_configurations']) {
-            $invalidProperties[] = "'supported_shipping_configurations' can't be null";
         }
 
         return $invalidProperties;
@@ -276,42 +267,30 @@ class PackingOption implements ModelInterface, ArrayAccess
         return $this;
     }
 
-    public function getPackingGroups()
+    public function getPlacementOptionId()
     {
-        return $this->container['packing_groups'];
+        return $this->container['placement_option_id'];
     }
 
-    public function setPackingGroups($packing_groups)
+    public function setPlacementOptionId($placement_option_id)
     {
-        $this->container['packing_groups'] = $packing_groups;
+        $this->container['placement_option_id'] = $placement_option_id;
 
         return $this;
     }
 
-    public function getPackingOptionId()
+    public function getShipmentIds()
     {
-        return $this->container['packing_option_id'];
+        return $this->container['shipment_ids'];
     }
 
-    public function setPackingOptionId($packing_option_id)
+    public function setShipmentIds($shipment_ids)
     {
-        $this->container['packing_option_id'] = $packing_option_id;
+        $this->container['shipment_ids'] = $shipment_ids;
 
         return $this;
     }
-
-    public function getSupportedShippingConfigurations()
-    {
-        return $this->container['supported_shipping_configurations'];
-    }
-
-    public function setSupportedShippingConfigurations($supported_shipping_configurations)
-    {
-        $this->container['supported_shipping_configurations'] = $supported_shipping_configurations;
-
-        return $this;
-    }
-
+    
     public function getStatus()
     {
         return $this->container['status'];

@@ -1,6 +1,6 @@
 <?php
 /**
- * PackageGroupingInput.
+ * GenerateTransportationOptionsRequest.
  *
  * PHP version 7
  *
@@ -8,11 +8,11 @@
  */
 
 /**
- * Selling Partner API for Reports.
+ * Selling Partner API for Fulfillment Inbound.
  *
- * The Selling Partner API for Reports lets you retrieve and manage a variety of reports that can help selling partners manage their businesses.
+ * The Selling Partner API for Fulfillment Inbound lets you create applications that create and update inbound shipments of inventory to Amazon's fulfillment network.
  *
- * OpenAPI spec version: 202406
+ * OpenAPI spec version: v202406
  */
 
 namespace ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound;
@@ -22,11 +22,14 @@ use ClouSale\AmazonSellingPartnerAPI\Models\ModelInterface;
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 
 /**
- * Report Class Doc Comment.
+ * GenerateTransportationOptionsRequest Class Doc Comment.
+ *
+
+ * @description The request schema for the createInboundPlan operation.
  *
  * @author   Stefan Neuhaus / ClouSale
  */
-class PackageGroupingInput implements ModelInterface, ArrayAccess
+class GenerateTransportationOptionsRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -35,7 +38,7 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'PackageGroupingInput';
+    protected static $swaggerModelName = 'GenerateTransportationOptionsRequest';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -43,9 +46,8 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'boxes' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\BoxInputList',
-        'packing_group_id' => 'string',
-        'shipment_id' => 'string',
+        'placement_option_id' => 'string',
+        'shipment_transportation_configurations' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ShipmentTransportationConfigurationList',
     ];
 
     /**
@@ -54,9 +56,8 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'boxes' => null,
-        'packing_group_id' => null,   
-        'shipment_id' => null,   
+        'placement_option_id' => null,
+        'shipment_transportation_configurations' => null,
     ];
 
     /**
@@ -86,9 +87,8 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'boxes' => 'boxes',
-        'packing_group_id' => 'packingGroupId',   
-        'shipment_id' => 'shipmentId',   
+        'placement_option_id' => 'placementOptionId',
+        'shipment_transportation_configurations' => 'shipmentTransportationConfigurations',
     ];
 
     /**
@@ -97,9 +97,8 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'boxes' => 'setBoxes',
-        'packing_group_id' => 'setPackingGroupId',   
-        'shipment_id' => 'setShipmentId',       
+        'placement_option_id' => 'setPlacementOptionId',
+        'shipment_transportation_configurations' => 'setShipmentTransportationConfigurations',
     ];
 
     /**
@@ -108,9 +107,8 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'boxes' => 'getBoxes',
-        'packing_group_id' => 'getPackingGroupId',   
-        'shipment_id' => 'getShipmentId',  
+        'placement_option_id' => 'getPlacementOptionId',
+        'shipment_transportation_configurations' => 'getShipmentTransportationConfigurations',
     ];
 
     /**
@@ -168,10 +166,10 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
      *                      initializing the model
      */
     public function __construct(array $data = null)
-    {    
-        $this->container['boxes'] = isset($data['boxes']) ? $data['boxes'] : null;
-        $this->container['packing_group_id'] = isset($data['packing_group_id']) ? $data['packing_group_id'] : null;
-        $this->container['shipment_id'] = isset($data['shipment_id']) ? $data['shipment_id'] : null;
+    {
+        $this->container['placement_option_id'] = isset($data['placement_option_id']) ? $data['placement_option_id'] : null;
+        $this->container['shipment_transportation_configurations'] = isset($data['shipment_transportation_configurations']) ? $data['shipment_transportation_configurations'] : null;
+        
     }
 
     /**
@@ -182,11 +180,12 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (null === $this->container['boxes']) {
-            $invalidProperties[] = "'boxes' can't be null";
+        if (null === $this->container['placement_option_id']) {
+            $invalidProperties[] = "'placement_option_id' can't be null";
         }
-
+        if (null === $this->container['shipment_transportation_configurations']) {
+            $invalidProperties[] = "'shipment_transportation_configurations' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -201,41 +200,31 @@ class PackageGroupingInput implements ModelInterface, ArrayAccess
         return 0 === count($this->listInvalidProperties());
     }
 
-    public function getBoxes()
+
+    public function getPlacementOptionId()
     {
-        return $this->container['boxes'];
+        return $this->container['placement_option_id'];
     }
 
-    public function setBoxes($boxes)
+    public function setPlacementOptionId($placement_option_id)
     {
-        $this->container['boxes'] = $boxes;
+        $this->container['placement_option_id'] = $placement_option_id;
 
         return $this;
     }
 
-    public function getPackingGroupId()
+    public function getShipmentTransportationConfigurations()
     {
-        return $this->container['packing_group_id'];
+        return $this->container['shipment_transportation_configurations'];
     }
 
-    public function setPackingGroupId($packing_group_id)
+    public function setShipmentTransportationConfigurations($shipment_transportation_configurations)
     {
-        $this->container['packing_group_id'] = $packing_group_id;
-
-        return $this;
-    }
-    public function getShipmentId()
-    {
-        return $this->container['shipment_id'];
-    }
-
-    public function setShipmentId($shipment_id)
-    {
-        $this->container['shipment_id'] = $shipment_id;
+        $this->container['shipment_transportation_configurations'] = $shipment_transportation_configurations;
 
         return $this;
     }
-    
+
     /**
      * Returns true if offset exists. False otherwise.
      *
