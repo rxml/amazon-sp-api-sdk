@@ -30,6 +30,8 @@ use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\SetPackingInforma
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GeneratePlacementOptionsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListPlacementOptionsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GenerateTransportationOptionsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GenerateDeliveryWindowOptionsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ShipmentResponse;
 
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 use GuzzleHttp\Client;
@@ -554,9 +556,37 @@ class FulfillmentInboundApi
 
     public function getShipment($inbound_plan_id, $shipment_id)
     {
-        // list($response) = $this->getShipmentWithHttpInfo($inbound_plan_id,$shipment_id);
+        list($response) = $this->getShipmentWithHttpInfo($inbound_plan_id, $shipment_id);
 
-        // return $response;
+        return $response;
+    }
+
+    public function getShipmentWithHttpInfo($inbound_plan_id, $shipment_id){
+        $request = $this->getShipmentRequest($inbound_plan_id, $shipment_id);
+
+        return $this->sendRequest($request, ShipmentResponse::class);
+    }
+
+    protected function getShipmentRequest($inbound_plan_id, $shipment_id)
+    {
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function listShipmentBoxes($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
@@ -610,9 +640,46 @@ class FulfillmentInboundApi
 
     public function generateDeliveryWindowOptions($inbound_plan_id, $shipment_id)
     {
-        // list($response) = $this->generateDeliveryWindowOptionsWithHttpInfo($inbound_plan_id,  $shipment_id);
+        list($response) = $this->generateDeliveryWindowOptionsWithHttpInfo($inbound_plan_id,  $shipment_id);
 
-        // return $response;
+        return $response;
+    }
+
+     public function generateDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id)
+    {
+        $request = $this->generateDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id);
+
+        return $this->sendRequest($request, GenerateDeliveryWindowOptionsResponse::class);
+    }
+
+    protected function generateDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generateDeliveryWindowOptions');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling generateDeliveryWindowOptions');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindowOptions';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
     public function confirmDeliveryWindowOptions($inbound_plan_id, $shipment_id,$delivery_window_option_id)
