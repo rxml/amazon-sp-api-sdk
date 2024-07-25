@@ -32,6 +32,12 @@ use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListPlacementOpti
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GenerateTransportationOptionsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GenerateDeliveryWindowOptionsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ShipmentResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ConfirmPlacementOptionResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ConfirmDeliveryWindowOptionsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ConfirmTransportationOptionsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetLabelsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetBillOfLadingResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\UpdateShipmentTrackingDetailsResponse;
 
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 use GuzzleHttp\Client;
@@ -549,9 +555,46 @@ class FulfillmentInboundApi
 
     public function confirmPlacementOption($inbound_plan_id, $placement_option_id)
     {
-        // list($response) = $this->confirmPlacementOptionWithHttpInfo($inbound_plan_id,$placement_option_id);
+        list($response) = $this->confirmPlacementOptionWithHttpInfo($inbound_plan_id, $placement_option_id);
 
         // return $response;
+    }
+
+    public function confirmPlacementOptionWithHttpInfo($inbound_plan_id, $placement_option_id)
+    {
+        $request = $this->confirmPlacementOptionRequest($inbound_plan_id, $placement_option_id);
+
+        return $this->sendRequest($request, ConfirmPlacementOptionResponse::class);
+    }
+
+    protected function confirmPlacementOptionRequest($inbound_plan_id, $placement_option_id)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling confirmPlacementOption');
+        }
+        if (null === $placement_option_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $placement_option_id when calling confirmPlacementOption');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/placementOptions/{placementOptionId}/confirmation';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{placementOptionId}',
+            ObjectSerializer::toPathValue($placement_option_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
     public function getShipment($inbound_plan_id, $shipment_id)
@@ -682,11 +725,57 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function confirmDeliveryWindowOptions($inbound_plan_id, $shipment_id,$delivery_window_option_id)
+    public function confirmDeliveryWindowOptions($inbound_plan_id, $shipment_id, $delivery_window_option_id)
     {
-        // list($response) = $this->confirmDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id, $delivery_window_option_id);
+        list($response) = $this->confirmDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id, $delivery_window_option_id);
 
-        // return $response;
+        return $response;
+    }
+
+    public function confirmDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id, $delivery_window_option_id)
+    {
+        $request = $this->confirmDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id, $delivery_window_option_id);
+
+        return $this->sendRequest($request, ConfirmDeliveryWindowOptionsResponse::class);
+    }
+
+    protected function confirmDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id, $delivery_window_option_id)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling confirmDeliveryWindowOptions');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling confirmDeliveryWindowOptions');
+        }
+        if (null === $delivery_window_option_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $delivery_window_option_id when calling confirmDeliveryWindowOptions');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindowOptions/{deliveryWindowOptionId}/confirmation';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+
+        $resourcePath = str_replace(
+            '{deliveryWindowOptionId}',
+            ObjectSerializer::toPathValue($delivery_window_option_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
     public function listShipmentItems($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
@@ -747,9 +836,51 @@ class FulfillmentInboundApi
 
     public function updateShipmentTrackingDetails($inbound_plan_id, $shipment_id, $body)
     {
-        // list($response) = $this->updateShipmentTrackingDetailsWithHttpInfo($inbound_plan_id, $shipment_id, $body);
+        list($response) = $this->updateShipmentTrackingDetailsWithHttpInfo($inbound_plan_id, $shipment_id, $body);
 
-        // return $response;
+        return $response;
+    }
+
+    public function updateShipmentTrackingDetailsWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    {
+        $request = $this->updateShipmentTrackingDetailsRequest($inbound_plan_id, $shipment_id, $body);
+
+        return $this->sendRequest($request, UpdateShipmentTrackingDetailsResponse::class);
+    }
+
+    protected function updateShipmentTrackingDetailsRequest($inbound_plan_id, $shipment_id, $body)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling updateShipmentTrackingDetails');
+        }
+
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling updateShipmentTrackingDetails');
+        }
+
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling updateShipmentTrackingDetails');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/trackingDetails';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
     public function listTransportationOptions($inbound_plan_id, $page_size = null, $pagination_token = null, $placement_option_id = null, $shipment_id = null)
@@ -801,9 +932,42 @@ class FulfillmentInboundApi
 
     public function confirmTransportationOptions($inbound_plan_id, $body)
     {
-        // list($response) = $this->confirmTransportationOptionsWithHttpInfo($inbound_plan_id, $body);
+        list($response) = $this->confirmTransportationOptionsWithHttpInfo($inbound_plan_id, $body);
 
-        // return $response;
+        return $response;
+    }
+
+    public function confirmTransportationOptionsWithHttpInfo($inbound_plan_id, $body)
+    {
+        $request = $this->confirmTransportationOptionsRequest($inbound_plan_id, $body);
+
+        return $this->sendRequest($request, ConfirmTransportationOptionsResponse::class);
+    }
+
+    protected function confirmTransportationOptionsRequest($inbound_plan_id, $body)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling confirmTransportationOptions');
+        }
+
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling confirmTransportationOptions');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/transportationOptions/confirmation';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
     public function listItemComplianceDetails($mskus, $marketplace_id)
@@ -832,6 +996,126 @@ class FulfillmentInboundApi
         // list($response) = $this->getInboundOperationStatusWithHttpInfo($operation_id);
 
         // return $response;
+    }
+
+    public function getLabels($shipment_id, $page_type, $label_type, $number_of_packages = null, $package_labels_to_print = null, $number_of_pallets = null, $page_size = null, $page_start_index = null)
+    {
+        list($response) = $this->getLabelsWithHttpInfo($shipment_id, $page_type, $label_type, $number_of_packages, $package_labels_to_print, $number_of_pallets, $page_size, $page_start_index);
+
+        return $response;
+    }
+
+    public function getLabelsWithHttpInfo($shipment_id, $page_type, $label_type, $number_of_packages = null, $package_labels_to_print = null, $number_of_pallets = null, $page_size = null, $page_start_index = null)
+    {
+        $request = $this->getLabelsRequest($shipment_id, $page_type, $label_type, $number_of_packages, $package_labels_to_print, $number_of_pallets, $page_size, $page_start_index);
+
+        return $this->sendRequest($request, GetLabelsResponse::class);
+    }
+
+    protected function getLabelsRequest($shipment_id, $page_type, $label_type, $number_of_packages = null, $package_labels_to_print = null, $number_of_pallets = null, $page_size = null, $page_start_index = null)
+    {
+        // verify the required parameter 'shipment_id' is set
+        if (null === $shipment_id || (is_array($shipment_id) && 0 === count($shipment_id))) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getLabels');
+        }
+        // verify the required parameter 'page_type' is set
+        if (null === $page_type || (is_array($page_type) && 0 === count($page_type))) {
+            throw new \InvalidArgumentException('Missing the required parameter $page_type when calling getLabels');
+        }
+        // verify the required parameter 'label_type' is set
+        if (null === $label_type || (is_array($label_type) && 0 === count($label_type))) {
+            throw new \InvalidArgumentException('Missing the required parameter $label_type when calling getLabels');
+        }
+
+        $resourcePath = '/fba/inbound/v0/shipments/{shipmentId}/labels';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if (null !== $page_type) {
+            $queryParams['PageType'] = ObjectSerializer::toQueryValue($page_type);
+        }
+        // query params
+        if (null !== $label_type) {
+            $queryParams['LabelType'] = ObjectSerializer::toQueryValue($label_type);
+        }
+        // query params
+        if (null !== $number_of_packages) {
+            $queryParams['NumberOfPackages'] = ObjectSerializer::toQueryValue($number_of_packages);
+        }
+        // query params
+        if (null !== $page_size) {
+            $queryParams['PageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $page_start_index) {
+            $queryParams['PageStartIndex'] = ObjectSerializer::toQueryValue($page_start_index);
+        }
+        // query params
+        if (is_array($package_labels_to_print)) {
+            $package_labels_to_print = ObjectSerializer::serializeCollection($package_labels_to_print, 'csv', true);
+        }
+        if (null !== $package_labels_to_print) {
+            $queryParams['PackageLabelsToPrint'] = ObjectSerializer::toQueryValue($package_labels_to_print);
+        }
+        // query params
+        if (null !== $number_of_pallets) {
+            $queryParams['NumberOfPallets'] = ObjectSerializer::toQueryValue($number_of_pallets);
+        }
+
+        // path params
+        if (null !== $shipment_id) {
+            $resourcePath = str_replace(
+                '{'.'shipmentId'.'}',
+                ObjectSerializer::toPathValue($shipment_id),
+                $resourcePath
+            );
+        }
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
+    }
+
+    public function getBillOfLading($shipment_id)
+    {
+        list($response) = $this->getBillOfLadingWithHttpInfo($shipment_id);
+
+        return $response;
+    }
+
+    public function getBillOfLadingWithHttpInfo($shipment_id)
+    {
+        $request = $this->getBillOfLadingRequest($shipment_id);
+
+        return $this->sendRequest($request, GetBillOfLadingResponse::class);
+    }
+
+    protected function getBillOfLadingRequest($shipment_id)
+    {
+        // verify the required parameter 'shipment_id' is set
+        if (null === $shipment_id || (is_array($shipment_id) && 0 === count($shipment_id))) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getBillOfLading');
+        }
+
+        $resourcePath = '/fba/inbound/v0/shipments/{shipmentId}/billOfLading';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // path params
+        if (null !== $shipment_id) {
+            $resourcePath = str_replace(
+                '{'.'shipmentId'.'}',
+                ObjectSerializer::toPathValue($shipment_id),
+                $resourcePath
+            );
+        }
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
 
