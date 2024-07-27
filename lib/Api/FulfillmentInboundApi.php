@@ -2,7 +2,7 @@
 /**
  * FulfillmentInboundApi.
  *
- * @author   Stefan Neuhaus / ClouSale
+ * @author  molin
  */
 
 /**
@@ -38,15 +38,16 @@ use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ConfirmTransporta
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetLabelsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetBillOfLadingResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\UpdateShipmentTrackingDetailsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListShipmentItemsResponse;
 
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
 /**
- * FbaInboundApi Class Doc Comment.
+ * FulfillmentInboundApi Class Doc Comment.
  *
- * @author   Stefan Neuhaus / ClouSale
+ * @author  molin
  */
 class FulfillmentInboundApi
 {
@@ -780,9 +781,47 @@ class FulfillmentInboundApi
 
     public function listShipmentItems($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
     {
-        // list($response) = $this->listShipmentItemsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
+        list($response) = $this->listShipmentItemsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
-        // return $response;
+        return $response;
+    }
+
+    public function listShipmentItemsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null){
+        $request = $this->listShipmentItemsRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
+
+        return $this->sendRequest($request, ListShipmentItemsResponse::class);
+    }
+
+    protected function listShipmentItemsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    {
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/items';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function updateShipmentName($inbound_plan_id, $shipment_id, $body)
