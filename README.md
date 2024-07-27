@@ -1,4 +1,4 @@
-基于[clousale/amazon-sp-api-php](https://github.com/clousale/amazon-sp-api-php)包修改，目前我使用的接口有OrdersApi/FeedsApi/FbaInboundApi/ReportsApi  
+基于[clousale/amazon-sp-api-php](https://github.com/clousale/amazon-sp-api-php)包修改和升级
 # Amazon Selling Partner API PHP 
 
 This is an API Binding in PHP for the new Amazon Selling Partner API.
