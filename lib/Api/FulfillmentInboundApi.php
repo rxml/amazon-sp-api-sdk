@@ -39,6 +39,21 @@ use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetLabelsResponse
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetBillOfLadingResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\UpdateShipmentTrackingDetailsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListShipmentItemsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\CancelInboundPlanResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListInboundPlanItemsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\UpdateInboundPlanNameResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListPackingGroupBoxesResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListInboundPlanPalletsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListShipmentBoxesResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListShipmentContentUpdatePreviewsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GenerateShipmentContentUpdatePreviewsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetShipmentContentUpdatePreviewResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ConfirmShipmentContentUpdatePreviewResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetDeliveryChallanDocumentResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListDeliveryWindowOptionsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\UpdateShipmentNameResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListShipmentPalletsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\CancelSelfShipAppointmentResponse;
 
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 use GuzzleHttp\Client;
@@ -233,30 +248,168 @@ class FulfillmentInboundApi
 
     public function cancelInboundPlan($inbound_plan_id)
     {
-        // list($response) = $this->cancelInboundPlanWithHttpInfo($inbound_plan_id);
+        list($response) = $this->cancelInboundPlanWithHttpInfo($inbound_plan_id);
 
-        // return $response;
+        return $response;
+    }
+
+    public function cancelInboundPlanWithHttpInfo($inbound_plan_id)
+    {
+        $request = $this->cancelInboundPlanRequest($inbound_plan_id);
+
+        return $this->sendRequest($request, CancelInboundPlanResponse::class);
+    }
+
+    protected function cancelInboundPlanRequest($inbound_plan_id)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling cancelInboundPlan');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/cancellation';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
     public function listInboundPlanItems($inbound_plan_id, $page_size = null, $pagination_token = null)
     {
-        // list($response) = $this->listInboundPlanItemsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
+        list($response) = $this->listInboundPlanItemsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
 
-        // return $response;
+        return $response;
+    }
+
+    public function listInboundPlanItemsWithHttpInfo($inbound_plan_id, $page_size = null, $pagination_token = null){
+        $request = $this->listInboundPlanItemsRequest($inbound_plan_id, $page_size, $pagination_token);
+
+        return $this->sendRequest($request, ListInboundPlanItemsResponse::class);
+    }
+
+    protected function listInboundPlanItemsRequest($inbound_plan_id, $page_size = null, $pagination_token = null)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listInboundPlanItems');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/items';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function updateInboundPlanName($inbound_plan_id, $body)
     {
-        // list($response) = $this->updateInboundPlanNameWithHttpInfo($inbound_plan_id,$body);
+        list($response) = $this->updateInboundPlanNameWithHttpInfo($inbound_plan_id, $body);
 
-        // return $response;
+        return $response;
+    }
+
+    public function updateInboundPlanNameWithHttpInfo($inbound_plan_id, $body)
+    {
+        $request = $this->updateInboundPlanNameRequest($inbound_plan_id, $body);
+
+        return $this->sendRequest($request, UpdateInboundPlanNameResponse::class);
+    }
+
+    protected function updateInboundPlanNameRequest($inbound_plan_id, $body)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling updateInboundPlanName');
+        }
+
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling updateInboundPlanName');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/name';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
     public function listPackingGroupBoxes($inbound_plan_id, $packing_group_id, $page_size = null, $pagination_token = null)
     {
-        // list($response) = $this->listPackingGroupBoxesWithHttpInfo($inbound_plan_id,$packing_group_id,$page_size, $pagination_token);
+        list($response) = $this->listPackingGroupBoxesWithHttpInfo($inbound_plan_id,$packing_group_id,$page_size, $pagination_token);
 
-        // return $response;
+        return $response;
+    }
+
+    public function listPackingGroupBoxesWithHttpInfo($inbound_plan_id, $packing_group_id, $page_size = null, $pagination_token = null){
+        $request = $this->listPackingGroupBoxesRequest($inbound_plan_id, $packing_group_id, $page_size, $pagination_token);
+
+        return $this->sendRequest($request, ListPackingGroupBoxesResponse::class);
+    }
+
+    protected function listPackingGroupBoxesRequest($inbound_plan_id, $packing_group_id, $page_size = null, $pagination_token = null)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listPackingGroupBoxes');
+        }
+        if (null === $packing_group_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $packing_group_id when calling listPackingGroupBoxes');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/packingGroups/{packingGroupId}/boxes';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{packingGroupId}',
+            ObjectSerializer::toPathValue($packing_group_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function listPackingGroupItems($inbound_plan_id, $packing_group_id, $page_size = null, $pagination_token = null)
@@ -470,9 +623,42 @@ class FulfillmentInboundApi
 
     public function listInboundPlanPallets($inbound_plan_id, $page_size = null, $pagination_token = null)
     {
-        // list($response) = $this->listInboundPlanPalletsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
+        list($response) = $this->listInboundPlanPalletsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
 
-        // return $response;
+        return $response;
+    }
+
+    public function listInboundPlanPalletsWithHttpInfo($inbound_plan_id, $page_size = null, $pagination_token = null){
+        $request = $this->listInboundPlanPalletsRequest($inbound_plan_id, $page_size, $pagination_token);
+
+        return $this->sendRequest($request, ListInboundPlanPalletsResponse::class);
+    }
+
+    protected function listInboundPlanPalletsRequest($inbound_plan_id, $page_size = null, $pagination_token = null)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listInboundPlanPallets');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/pallets';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function listPlacementOptions($inbound_plan_id, $page_size = null, $pagination_token = null)
@@ -558,7 +744,7 @@ class FulfillmentInboundApi
     {
         list($response) = $this->confirmPlacementOptionWithHttpInfo($inbound_plan_id, $placement_option_id);
 
-        // return $response;
+        return $response;
     }
 
     public function confirmPlacementOptionWithHttpInfo($inbound_plan_id, $placement_option_id)
@@ -613,7 +799,12 @@ class FulfillmentInboundApi
 
     protected function getShipmentRequest($inbound_plan_id, $shipment_id)
     {
-
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling getShipment');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getShipment');
+        }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}';
         $formParams = [];
         $queryParams = [];
@@ -635,51 +826,338 @@ class FulfillmentInboundApi
 
     public function listShipmentBoxes($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
     {
-        // list($response) = $this->listShipmentBoxesWithHttpInfo($inbound_plan_id,  $shipment_id, $page_size, $pagination_token);
+        list($response) = $this->listShipmentBoxesWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
-        // return $response;
+        return $response;
+    }
+
+    public function listShipmentBoxesWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null){
+        $request = $this->listShipmentBoxesRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
+
+        return $this->sendRequest($request, ListShipmentBoxesResponse::class);
+    }
+
+    protected function listShipmentBoxesRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listShipmentBoxes');
+        }
+
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling listShipmentBoxes');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/boxes';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function listShipmentContentUpdatePreviews($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
     {
-        // list($response) = $this->listShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id,  $shipment_id, $page_size, $pagination_token);
+        list($response) = $this->listShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id,  $shipment_id, $page_size, $pagination_token);
 
-        // return $response;
+        return $response;
+    }
+
+    public function listShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null){
+        $request = $this->listShipmentContentUpdatePreviewsRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
+
+        return $this->sendRequest($request, ListShipmentContentUpdatePreviewsResponse::class);
+    }
+
+    protected function listShipmentContentUpdatePreviewsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listShipmentContentUpdatePreviews');
+        }
+
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling listShipmentContentUpdatePreviews');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function generateShipmentContentUpdatePreviews($inbound_plan_id, $shipment_id, $body)
     {
-        // list($response) = $this->generateShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id,  $shipment_id, $body);
+        list($response) = $this->generateShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id,  $shipment_id, $body);
 
-        // return $response;
+        return $response;
+    }
+
+    public function generateShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    {
+        $request = $this->generateShipmentContentUpdatePreviewsRequest($inbound_plan_id, $shipment_id, $body);
+
+        return $this->sendRequest($request, GenerateShipmentContentUpdatePreviewsResponse::class);
+    }
+
+    protected function generateShipmentContentUpdatePreviewsRequest($inbound_plan_id, $shipment_id, $body)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generateShipmentContentUpdatePreviews');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling generateShipmentContentUpdatePreviews');
+        }
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling generateShipmentContentUpdatePreviews');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
     public function getShipmentContentUpdatePreview($inbound_plan_id, $shipment_id, $content_update_preview_id)
     {
-        // list($response) = $this->getShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id,  $shipment_id, $content_update_preview_id);
+        list($response) = $this->getShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id,  $shipment_id, $content_update_preview_id);
 
-        // return $response;
+        return $response;
+    }
+
+    public function getShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id, $shipment_id, $content_update_preview_id){
+        $request = $this->getShipmentContentUpdatePreviewRequest($inbound_plan_id, $shipment_id, $content_update_preview_id);
+
+        return $this->sendRequest($request, GetShipmentContentUpdatePreviewResponse::class);
+    }
+
+    protected function getShipmentContentUpdatePreviewRequest($inbound_plan_id,  $shipment_id, $content_update_preview_id)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling getShipmentContentUpdatePreview');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getShipmentContentUpdatePreview');
+        }
+        if (null === $content_update_preview_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $content_update_preview_id when calling getShipmentContentUpdatePreview');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews/{contentUpdatePreviewId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{contentUpdatePreviewId}',
+            ObjectSerializer::toPathValue($content_update_preview_id),
+            $resourcePath
+        );
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function confirmShipmentContentUpdatePreview($inbound_plan_id, $shipment_id, $content_update_preview_id)
     {
-        // list($response) = $this->confirmShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id,  $shipment_id, $content_update_preview_id);
+        list($response) = $this->confirmShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id, $shipment_id, $content_update_preview_id);
 
-        // return $response;
+        return $response;
+    }
+
+    public function confirmShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id, $shipment_id, $content_update_preview_id)
+    {
+        $request = $this->confirmShipmentContentUpdatePreviewRequest($inbound_plan_id, $shipment_id, $content_update_preview_id);
+
+        return $this->sendRequest($request, ConfirmShipmentContentUpdatePreviewResponse::class);
+    }
+
+    protected function confirmShipmentContentUpdatePreviewRequest($inbound_plan_id, $shipment_id, $content_update_preview_id)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling confirmShipmentContentUpdatePreview');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling confirmShipmentContentUpdatePreview');
+        }
+        if (null === $content_update_preview_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $delivery_window_option_id when calling confirmShipmentContentUpdatePreview');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews/{contentUpdatePreviewId}/confirmation';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+
+        $resourcePath = str_replace(
+            '{contentUpdatePreviewId}',
+            ObjectSerializer::toPathValue($content_update_preview_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
     public function getDeliveryChallanDocument($inbound_plan_id, $shipment_id)
     {
-        // list($response) = $this->getDeliveryChallanDocumentWithHttpInfo($inbound_plan_id,  $shipment_id);
+        list($response) = $this->getDeliveryChallanDocumentWithHttpInfo($inbound_plan_id,  $shipment_id);
 
-        // return $response;
+        return $response;
+    }
+
+    public function getDeliveryChallanDocumentWithHttpInfo($inbound_plan_id, $shipment_id){
+        $request = $this->getDeliveryChallanDocumentRequest($inbound_plan_id, $shipment_id);
+
+        return $this->sendRequest($request, GetDeliveryChallanDocumentResponse::class);
+    }
+
+    protected function getDeliveryChallanDocumentRequest($inbound_plan_id,  $shipment_id)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling getDeliveryChallanDocument');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getDeliveryChallanDocument');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryChallanDocument';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function listDeliveryWindowOptions($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
     {
-        // list($response) = $this->listDeliveryWindowOptionsWithHttpInfo($inbound_plan_id,  $shipment_id, $page_size, $pagination_token);
+        list($response) = $this->listDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
-        // return $response;
+        return $response;
+    }
+
+    public function listDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null){
+        $request = $this->listDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
+
+        return $this->sendRequest($request, ListDeliveryWindowOptionsResponse::class);
+    }
+
+    protected function listDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listDeliveryWindowOptions');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling listDeliveryWindowOptions');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindowOptions';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function generateDeliveryWindowOptions($inbound_plan_id, $shipment_id)
@@ -794,7 +1272,12 @@ class FulfillmentInboundApi
 
     protected function listShipmentItemsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
     {
-
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listShipmentItems');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling listShipmentItems');
+        }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/items';
         $formParams = [];
         $queryParams = [];
@@ -826,23 +1309,143 @@ class FulfillmentInboundApi
 
     public function updateShipmentName($inbound_plan_id, $shipment_id, $body)
     {
-        // list($response) = $this->updateShipmentNameWithHttpInfo($inbound_plan_id, $shipment_id, $body);
+        list($response) = $this->updateShipmentNameWithHttpInfo($inbound_plan_id, $shipment_id, $body);
 
-        // return $response;
+        return $response;
+    }
+
+    public function updateShipmentNameWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    {
+        $request = $this->updateShipmentNameRequest($inbound_plan_id, $shipment_id, $body);
+
+        return $this->sendRequest($request, UpdateShipmentNameResponse::class);
+    }
+
+    protected function updateShipmentNameRequest($inbound_plan_id, $shipment_id, $body)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling updateShipmentName');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling updateShipmentName');
+        }
+
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling updateShipmentName');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/name';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
     public function listShipmentPallets($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
     {
-        // list($response) = $this->listShipmentPalletsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
+        list($response) = $this->listShipmentPalletsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
-        // return $response;
+        return $response;
+    }
+
+    public function listShipmentPalletsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null){
+        $request = $this->listShipmentPalletsRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
+
+        return $this->sendRequest($request, ListShipmentPalletsResponse::class);
+    }
+
+    protected function listShipmentPalletsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listShipmentPallets');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling listShipmentPallets');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/pallets';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function cancelSelfShipAppointment($inbound_plan_id, $shipment_id, $body)
     {
-        // list($response) = $this->cancelSelfShipAppointmentWithHttpInfo($inbound_plan_id, $shipment_id, $body);
+        list($response) = $this->cancelSelfShipAppointmentWithHttpInfo($inbound_plan_id, $shipment_id, $body);
 
-        // return $response;
+        return $response;
+    }
+
+    public function cancelSelfShipAppointmentWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    {
+        $request = $this->cancelSelfShipAppointmentRequest($inbound_plan_id, $shipment_id, $body);
+
+        return $this->sendRequest($request, CancelSelfShipAppointmentResponse::class);
+    }
+
+    protected function cancelSelfShipAppointmentRequest($inbound_plan_id, $shipment_id, $body)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling cancelSelfShipAppointment');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling cancelSelfShipAppointment');
+        }
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling cancelSelfShipAppointment');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentCancellation';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
     public function getSelfShipAppointmentSlots($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
