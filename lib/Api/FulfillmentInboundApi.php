@@ -54,6 +54,10 @@ use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListDeliveryWindo
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\UpdateShipmentNameResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListShipmentPalletsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\CancelSelfShipAppointmentResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetSelfShipAppointmentSlotsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GenerateSelfShipAppointmentSlotsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ScheduleSelfShipAppointmentResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\UpdateShipmentSourceAddressResponse;
 
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 use GuzzleHttp\Client;
@@ -1450,30 +1454,203 @@ class FulfillmentInboundApi
 
     public function getSelfShipAppointmentSlots($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
     {
-        // list($response) = $this->getSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
+        list($response) = $this->getSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
-        // return $response;
+        return $response;
+    }
+
+    public function getSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    {
+        $request = $this->getSelfShipAppointmentSlotsRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
+
+        return $this->sendRequest($request, GetSelfShipAppointmentSlotsResponse::class);
+    }
+
+    protected function getSelfShipAppointmentSlotsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling getSelfShipAppointmentSlots');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getSelfShipAppointmentSlots');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
     public function generateSelfShipAppointmentSlots($inbound_plan_id, $shipment_id, $body)
     {
-        // list($response) = $this->generateSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id, $shipment_id, $body);
+        list($response) = $this->generateSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id, $shipment_id, $body);
 
-        // return $response;
+        return $response;
+    }
+
+    public function generateSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    {
+        $request = $this->generateSelfShipAppointmentSlotsRequest($inbound_plan_id, $shipment_id, $body);
+
+        return $this->sendRequest($request, GenerateSelfShipAppointmentSlotsResponse::class);
+    }
+
+    protected function generateSelfShipAppointmentSlotsRequest($inbound_plan_id, $shipment_id, $body)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generateSelfShipAppointmentSlots');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling generateSelfShipAppointmentSlots');
+        }
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling generateSelfShipAppointmentSlots');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
     public function scheduleSelfShipAppointment($inbound_plan_id, $shipment_id, $slot_id, $body)
     {
-        // list($response) = $this->scheduleSelfShipAppointmentWithHttpInfo($inbound_plan_id, $shipment_id, $slot_id, $body);
+        list($response) = $this->scheduleSelfShipAppointmentWithHttpInfo($inbound_plan_id, $shipment_id, $slot_id, $body);
 
-        // return $response;
+        return $response;
+    }
+
+    public function scheduleSelfShipAppointmentWithHttpInfo($inbound_plan_id, $shipment_id, $slot_id, $body)
+    {
+        $request = $this->scheduleSelfShipAppointmentRequest($inbound_plan_id, $shipment_id, $slot_id, $body);
+
+        return $this->sendRequest($request, ScheduleSelfShipAppointmentResponse::class);
+    }
+
+    protected function scheduleSelfShipAppointmentRequest($inbound_plan_id, $shipment_id, $slot_id, $body)
+    {
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling scheduleSelfShipAppointment');
+        }
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling scheduleSelfShipAppointment');
+        }
+        if (null === $slot_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $slot_id when calling scheduleSelfShipAppointment');
+        }
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling scheduleSelfShipAppointment');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/selfShipAppointmentSlots/{slotId}/schedule';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{slotId}',
+            ObjectSerializer::toPathValue($slot_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
     public function updateShipmentSourceAddress($inbound_plan_id, $shipment_id, $body)
     {
-        // list($response) = $this->updateShipmentSourceAddressWithHttpInfo($inbound_plan_id, $shipment_id, $body);
+        list($response) = $this->updateShipmentSourceAddressWithHttpInfo($inbound_plan_id, $shipment_id, $body);
 
-        // return $response;
+        return $response;
+    }
+
+    public function updateShipmentSourceAddressWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    {
+        $request = $this->updateShipmentSourceAddressRequest($inbound_plan_id, $shipment_id, $body);
+
+        return $this->sendRequest($request, UpdateShipmentSourceAddressResponse::class);
+    }
+
+    protected function updateShipmentSourceAddressRequest($inbound_plan_id, $shipment_id, $body)
+    {
+        // verify the required parameter 'body' is set
+        if (null === $inbound_plan_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling updateShipmentSourceAddress');
+        }
+
+        if (null === $shipment_id) {
+            throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling updateShipmentSourceAddress');
+        }
+
+        if (null === $body || (is_array($body) && 0 === count($body))) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling updateShipmentSourceAddress');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/sourceAddress';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        $resourcePath = str_replace(
+            '{shipmentId}',
+            ObjectSerializer::toPathValue($shipment_id),
+            $resourcePath
+        );
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
     public function updateShipmentTrackingDetails($inbound_plan_id, $shipment_id, $body)
