@@ -58,6 +58,11 @@ use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetSelfShipAppoin
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GenerateSelfShipAppointmentSlotsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ScheduleSelfShipAppointmentResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\UpdateShipmentSourceAddressResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListTransportationOptionsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListItemComplianceDetailsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\UpdateItemComplianceDetailsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\CreateMarketplaceItemLabelsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetInboundOperationStatusResponse;
 
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 use GuzzleHttp\Client;
@@ -150,24 +155,24 @@ class FulfillmentInboundApi
     }
 
 
-    public function createInboundPlan($body)
+    public function createInboundPlan($body = null)
     {
         list($response) = $this->createInboundPlanWithHttpInfo($body);
 
         return $response;
     }
 
-    public function createInboundPlanWithHttpInfo($body)
+    public function createInboundPlanWithHttpInfo($body = null)
     {
         $request = $this->createInboundPlanRequest($body);
 
         return $this->sendRequest($request, CreateInboundPlanResponse::class);
     }
 
-    protected function createInboundPlanRequest($body)
+    protected function createInboundPlanRequest($body = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling createInboundPlan');
         }
 
@@ -181,22 +186,24 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function getInboundPlan($inbound_plan_id)
+    public function getInboundPlan($inbound_plan_id = null)
     {
         list($response) = $this->getInboundPlanWithHttpInfo($inbound_plan_id);
 
         return $response;
     }
 
-    public function getInboundPlanWithHttpInfo($inbound_plan_id){
+    public function getInboundPlanWithHttpInfo($inbound_plan_id = null){
         $request = $this->getInboundPlanRequest($inbound_plan_id);
 
         return $this->sendRequest($request, GetInboundPlanResponse::class);
     }
 
-    protected function getInboundPlanRequest($inbound_plan_id)
+    protected function getInboundPlanRequest($inbound_plan_id = null)
     {
-
+        if (empty($inbound_plan_id)) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling getInboundPlan');
+        }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}';
         $formParams = [];
         $queryParams = [];
@@ -211,21 +218,25 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function listInboundPlanBoxes($inbound_plan_id, $page_size = null, $pagination_token = null)
+    public function listInboundPlanBoxes($inbound_plan_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listInboundPlanBoxesWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listInboundPlanBoxesWithHttpInfo($inbound_plan_id, $page_size = null, $pagination_token = null){
+    public function listInboundPlanBoxesWithHttpInfo($inbound_plan_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listInboundPlanBoxesRequest($inbound_plan_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListInboundPlanBoxesResponse::class);
     }
 
-    protected function listInboundPlanBoxesRequest($inbound_plan_id, $page_size = null, $pagination_token = null)
+    protected function listInboundPlanBoxesRequest($inbound_plan_id = null, $page_size = null, $pagination_token = null)
     {
+
+        if (empty($inbound_plan_id)) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listInboundPlanBoxes');
+        }
 
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/boxes';
         $formParams = [];
@@ -250,23 +261,23 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function cancelInboundPlan($inbound_plan_id)
+    public function cancelInboundPlan($inbound_plan_id = null)
     {
         list($response) = $this->cancelInboundPlanWithHttpInfo($inbound_plan_id);
 
         return $response;
     }
 
-    public function cancelInboundPlanWithHttpInfo($inbound_plan_id)
+    public function cancelInboundPlanWithHttpInfo($inbound_plan_id = null)
     {
         $request = $this->cancelInboundPlanRequest($inbound_plan_id);
 
         return $this->sendRequest($request, CancelInboundPlanResponse::class);
     }
 
-    protected function cancelInboundPlanRequest($inbound_plan_id)
+    protected function cancelInboundPlanRequest($inbound_plan_id = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling cancelInboundPlan');
         }
 
@@ -285,22 +296,22 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
-    public function listInboundPlanItems($inbound_plan_id, $page_size = null, $pagination_token = null)
+    public function listInboundPlanItems($inbound_plan_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listInboundPlanItemsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listInboundPlanItemsWithHttpInfo($inbound_plan_id, $page_size = null, $pagination_token = null){
+    public function listInboundPlanItemsWithHttpInfo($inbound_plan_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listInboundPlanItemsRequest($inbound_plan_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListInboundPlanItemsResponse::class);
     }
 
-    protected function listInboundPlanItemsRequest($inbound_plan_id, $page_size = null, $pagination_token = null)
+    protected function listInboundPlanItemsRequest($inbound_plan_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listInboundPlanItems');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/items';
@@ -327,27 +338,27 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function updateInboundPlanName($inbound_plan_id, $body)
+    public function updateInboundPlanName($inbound_plan_id = null, $body = null)
     {
         list($response) = $this->updateInboundPlanNameWithHttpInfo($inbound_plan_id, $body);
 
         return $response;
     }
 
-    public function updateInboundPlanNameWithHttpInfo($inbound_plan_id, $body)
+    public function updateInboundPlanNameWithHttpInfo($inbound_plan_id = null, $body = null)
     {
         $request = $this->updateInboundPlanNameRequest($inbound_plan_id, $body);
 
         return $this->sendRequest($request, UpdateInboundPlanNameResponse::class);
     }
 
-    protected function updateInboundPlanNameRequest($inbound_plan_id, $body)
+    protected function updateInboundPlanNameRequest($inbound_plan_id = null, $body = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling updateInboundPlanName');
         }
 
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling updateInboundPlanName');
         }
 
@@ -366,25 +377,25 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
-    public function listPackingGroupBoxes($inbound_plan_id, $packing_group_id, $page_size = null, $pagination_token = null)
+    public function listPackingGroupBoxes($inbound_plan_id = null, $packing_group_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listPackingGroupBoxesWithHttpInfo($inbound_plan_id,$packing_group_id,$page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listPackingGroupBoxesWithHttpInfo($inbound_plan_id, $packing_group_id, $page_size = null, $pagination_token = null){
+    public function listPackingGroupBoxesWithHttpInfo($inbound_plan_id = null, $packing_group_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listPackingGroupBoxesRequest($inbound_plan_id, $packing_group_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListPackingGroupBoxesResponse::class);
     }
 
-    protected function listPackingGroupBoxesRequest($inbound_plan_id, $packing_group_id, $page_size = null, $pagination_token = null)
+    protected function listPackingGroupBoxesRequest($inbound_plan_id = null, $packing_group_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listPackingGroupBoxes');
         }
-        if (null === $packing_group_id) {
+        if (empty($packing_group_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $packing_group_id when calling listPackingGroupBoxes');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/packingGroups/{packingGroupId}/boxes';
@@ -416,25 +427,25 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function listPackingGroupItems($inbound_plan_id, $packing_group_id, $page_size = null, $pagination_token = null)
+    public function listPackingGroupItems($inbound_plan_id = null, $packing_group_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listPackingGroupItemsWithHttpInfo($inbound_plan_id,$packing_group_id,$page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listPackingGroupItemsWithHttpInfo($inbound_plan_id, $packing_group_id, $page_size = null, $pagination_token = null){
+    public function listPackingGroupItemsWithHttpInfo($inbound_plan_id = null, $packing_group_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listPackingGroupItemsRequest($inbound_plan_id, $packing_group_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListPackingGroupItemsResponse::class);
     }
 
-    protected function listPackingGroupItemsRequest($inbound_plan_id, $packing_group_id, $page_size = null, $pagination_token = null)
+    protected function listPackingGroupItemsRequest($inbound_plan_id = null, $packing_group_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listPackingGroupItems');
         }
-        if (null === $packing_group_id) {
+        if (empty($packing_group_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $packing_group_id when calling listPackingGroupItems');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/packingGroups/{packingGroupId}/items';
@@ -464,28 +475,28 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function setPackingInformation($inbound_plan_id, $body)
+    public function setPackingInformation($inbound_plan_id = null, $body = null)
     {
         list($response) = $this->setPackingInformationWithHttpInfo($inbound_plan_id, $body);
 
         return $response;
     }
 
-    public function setPackingInformationWithHttpInfo($inbound_plan_id, $body)
+    public function setPackingInformationWithHttpInfo($inbound_plan_id = null, $body = null)
     {
         $request = $this->setPackingInformationRequest($inbound_plan_id, $body);
 
         return $this->sendRequest($request, SetPackingInformationResponse::class);
     }
 
-    protected function setPackingInformationRequest($inbound_plan_id, $body)
+    protected function setPackingInformationRequest($inbound_plan_id = null, $body = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling setPackingInformation');
         }
 
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling setPackingInformation');
         }
 
@@ -504,22 +515,22 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function listPackingOptions($inbound_plan_id, $page_size = null, $pagination_token = null)
+    public function listPackingOptions($inbound_plan_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listPackingOptionsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listPackingOptionsWithHttpInfo($inbound_plan_id, $page_size = null, $pagination_token = null){
+    public function listPackingOptionsWithHttpInfo($inbound_plan_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listPackingOptionsRequest($inbound_plan_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListPackingOptionsResponse::class);
     }
 
-    protected function listPackingOptionsRequest($inbound_plan_id, $page_size = null, $pagination_token = null)
+    protected function listPackingOptionsRequest($inbound_plan_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listPackingOptions');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/packingOptions';
@@ -544,24 +555,23 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function generatePackingOptions($inbound_plan_id)
+    public function generatePackingOptions($inbound_plan_id = null)
     {
         list($response) = $this->generatePackingOptionsWithHttpInfo($inbound_plan_id);
 
         return $response;
     }
 
-    public function generatePackingOptionsWithHttpInfo($inbound_plan_id)
+    public function generatePackingOptionsWithHttpInfo($inbound_plan_id = null)
     {
         $request = $this->generatePackingOptionsRequest($inbound_plan_id);
 
         return $this->sendRequest($request, GeneratePackingOptionsResponse::class);
     }
 
-    protected function generatePackingOptionsRequest($inbound_plan_id)
+    protected function generatePackingOptionsRequest($inbound_plan_id = null)
     {
-        // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generatePackingOptions');
         }
 
@@ -580,27 +590,27 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function confirmPackingOption($inbound_plan_id, $packing_option_id)
+    public function confirmPackingOption($inbound_plan_id = null, $packing_option_id = null)
     {
         list($response) = $this->confirmPackingOptionWithHttpInfo($inbound_plan_id, $packing_option_id);
 
         return $response;
     }
 
-    public function confirmPackingOptionWithHttpInfo($inbound_plan_id, $packing_option_id)
+    public function confirmPackingOptionWithHttpInfo($inbound_plan_id = null, $packing_option_id = null)
     {
         $request = $this->confirmPackingOptionRequest($inbound_plan_id, $packing_option_id);
 
         return $this->sendRequest($request, ConfirmPackingOptionResponse::class);
     }
 
-    protected function confirmPackingOptionRequest($inbound_plan_id, $packing_option_id)
+    protected function confirmPackingOptionRequest($inbound_plan_id = null, $packing_option_id = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling confirmPackingOption');
         }
-        if (null === $packing_option_id) {
+        if (empty($packing_option_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $packing_option_id when calling confirmPackingOption');
         }
 
@@ -625,22 +635,22 @@ class FulfillmentInboundApi
     }
 
 
-    public function listInboundPlanPallets($inbound_plan_id, $page_size = null, $pagination_token = null)
+    public function listInboundPlanPallets($inbound_plan_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listInboundPlanPalletsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listInboundPlanPalletsWithHttpInfo($inbound_plan_id, $page_size = null, $pagination_token = null){
+    public function listInboundPlanPalletsWithHttpInfo($inbound_plan_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listInboundPlanPalletsRequest($inbound_plan_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListInboundPlanPalletsResponse::class);
     }
 
-    protected function listInboundPlanPalletsRequest($inbound_plan_id, $page_size = null, $pagination_token = null)
+    protected function listInboundPlanPalletsRequest($inbound_plan_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listInboundPlanPallets');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/pallets';
@@ -665,22 +675,22 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function listPlacementOptions($inbound_plan_id, $page_size = null, $pagination_token = null)
+    public function listPlacementOptions($inbound_plan_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listPlacementOptionsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listPlacementOptionsWithHttpInfo($inbound_plan_id, $page_size = null, $pagination_token = null){
+    public function listPlacementOptionsWithHttpInfo($inbound_plan_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listPlacementOptionsRequest($inbound_plan_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListPlacementOptionsResponse::class);
     }
 
-    protected function listPlacementOptionsRequest($inbound_plan_id, $page_size = null, $pagination_token = null)
+    protected function listPlacementOptionsRequest($inbound_plan_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listPackingOptions');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/placementOptions';
@@ -705,27 +715,27 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function generatePlacementOptions($inbound_plan_id, $body)
+    public function generatePlacementOptions($inbound_plan_id = null, $body = null)
     {
         list($response) = $this->generatePlacementOptionsWithHttpInfo($inbound_plan_id, $body);
 
         return $response;
     }
 
-    public function generatePlacementOptionsWithHttpInfo($inbound_plan_id, $body)
+    public function generatePlacementOptionsWithHttpInfo($inbound_plan_id = null, $body = null)
     {
         $request = $this->generatePlacementOptionsRequest($inbound_plan_id, $body);
 
         return $this->sendRequest($request, GeneratePlacementOptionsResponse::class);
     }
 
-    protected function generatePlacementOptionsRequest($inbound_plan_id, $body)
+    protected function generatePlacementOptionsRequest($inbound_plan_id = null, $body = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generatePlacementOptions');
         }
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling generatePlacementOptions');
         }
 
@@ -744,27 +754,27 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function confirmPlacementOption($inbound_plan_id, $placement_option_id)
+    public function confirmPlacementOption($inbound_plan_id = null, $placement_option_id = null)
     {
         list($response) = $this->confirmPlacementOptionWithHttpInfo($inbound_plan_id, $placement_option_id);
 
         return $response;
     }
 
-    public function confirmPlacementOptionWithHttpInfo($inbound_plan_id, $placement_option_id)
+    public function confirmPlacementOptionWithHttpInfo($inbound_plan_id = null, $placement_option_id = null)
     {
         $request = $this->confirmPlacementOptionRequest($inbound_plan_id, $placement_option_id);
 
         return $this->sendRequest($request, ConfirmPlacementOptionResponse::class);
     }
 
-    protected function confirmPlacementOptionRequest($inbound_plan_id, $placement_option_id)
+    protected function confirmPlacementOptionRequest($inbound_plan_id = null, $placement_option_id = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling confirmPlacementOption');
         }
-        if (null === $placement_option_id) {
+        if (empty($placement_option_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $placement_option_id when calling confirmPlacementOption');
         }
 
@@ -788,25 +798,25 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function getShipment($inbound_plan_id, $shipment_id)
+    public function getShipment($inbound_plan_id = null, $shipment_id = null)
     {
         list($response) = $this->getShipmentWithHttpInfo($inbound_plan_id, $shipment_id);
 
         return $response;
     }
 
-    public function getShipmentWithHttpInfo($inbound_plan_id, $shipment_id){
+    public function getShipmentWithHttpInfo($inbound_plan_id = null, $shipment_id = null){
         $request = $this->getShipmentRequest($inbound_plan_id, $shipment_id);
 
         return $this->sendRequest($request, ShipmentResponse::class);
     }
 
-    protected function getShipmentRequest($inbound_plan_id, $shipment_id)
+    protected function getShipmentRequest($inbound_plan_id = null, $shipment_id = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling getShipment');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getShipment');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}';
@@ -828,26 +838,26 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function listShipmentBoxes($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    public function listShipmentBoxes($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listShipmentBoxesWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listShipmentBoxesWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null){
+    public function listShipmentBoxesWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listShipmentBoxesRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListShipmentBoxesResponse::class);
     }
 
-    protected function listShipmentBoxesRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    protected function listShipmentBoxesRequest($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listShipmentBoxes');
         }
 
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling listShipmentBoxes');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/boxes';
@@ -877,26 +887,26 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function listShipmentContentUpdatePreviews($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    public function listShipmentContentUpdatePreviews($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id,  $shipment_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null){
+    public function listShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listShipmentContentUpdatePreviewsRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListShipmentContentUpdatePreviewsResponse::class);
     }
 
-    protected function listShipmentContentUpdatePreviewsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    protected function listShipmentContentUpdatePreviewsRequest($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listShipmentContentUpdatePreviews');
         }
 
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling listShipmentContentUpdatePreviews');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews';
@@ -926,30 +936,30 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function generateShipmentContentUpdatePreviews($inbound_plan_id, $shipment_id, $body)
+    public function generateShipmentContentUpdatePreviews($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         list($response) = $this->generateShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id,  $shipment_id, $body);
 
         return $response;
     }
 
-    public function generateShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    public function generateShipmentContentUpdatePreviewsWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         $request = $this->generateShipmentContentUpdatePreviewsRequest($inbound_plan_id, $shipment_id, $body);
 
         return $this->sendRequest($request, GenerateShipmentContentUpdatePreviewsResponse::class);
     }
 
-    protected function generateShipmentContentUpdatePreviewsRequest($inbound_plan_id, $shipment_id, $body)
+    protected function generateShipmentContentUpdatePreviewsRequest($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generateShipmentContentUpdatePreviews');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling generateShipmentContentUpdatePreviews');
         }
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling generateShipmentContentUpdatePreviews');
         }
 
@@ -973,28 +983,28 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function getShipmentContentUpdatePreview($inbound_plan_id, $shipment_id, $content_update_preview_id)
+    public function getShipmentContentUpdatePreview($inbound_plan_id = null, $shipment_id = null, $content_update_preview_id = null)
     {
         list($response) = $this->getShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id,  $shipment_id, $content_update_preview_id);
 
         return $response;
     }
 
-    public function getShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id, $shipment_id, $content_update_preview_id){
+    public function getShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $content_update_preview_id = null){
         $request = $this->getShipmentContentUpdatePreviewRequest($inbound_plan_id, $shipment_id, $content_update_preview_id);
 
         return $this->sendRequest($request, GetShipmentContentUpdatePreviewResponse::class);
     }
 
-    protected function getShipmentContentUpdatePreviewRequest($inbound_plan_id,  $shipment_id, $content_update_preview_id)
+    protected function getShipmentContentUpdatePreviewRequest($inbound_plan_id = null, $shipment_id = null, $content_update_preview_id = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling getShipmentContentUpdatePreview');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getShipmentContentUpdatePreview');
         }
-        if (null === $content_update_preview_id) {
+        if (empty($content_update_preview_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $content_update_preview_id when calling getShipmentContentUpdatePreview');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/contentUpdatePreviews/{contentUpdatePreviewId}';
@@ -1021,30 +1031,30 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function confirmShipmentContentUpdatePreview($inbound_plan_id, $shipment_id, $content_update_preview_id)
+    public function confirmShipmentContentUpdatePreview($inbound_plan_id = null, $shipment_id = null, $content_update_preview_id = null)
     {
         list($response) = $this->confirmShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id, $shipment_id, $content_update_preview_id);
 
         return $response;
     }
 
-    public function confirmShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id, $shipment_id, $content_update_preview_id)
+    public function confirmShipmentContentUpdatePreviewWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $content_update_preview_id = null)
     {
         $request = $this->confirmShipmentContentUpdatePreviewRequest($inbound_plan_id, $shipment_id, $content_update_preview_id);
 
         return $this->sendRequest($request, ConfirmShipmentContentUpdatePreviewResponse::class);
     }
 
-    protected function confirmShipmentContentUpdatePreviewRequest($inbound_plan_id, $shipment_id, $content_update_preview_id)
+    protected function confirmShipmentContentUpdatePreviewRequest($inbound_plan_id = null, $shipment_id = null, $content_update_preview_id = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling confirmShipmentContentUpdatePreview');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling confirmShipmentContentUpdatePreview');
         }
-        if (null === $content_update_preview_id) {
+        if (empty($content_update_preview_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $delivery_window_option_id when calling confirmShipmentContentUpdatePreview');
         }
 
@@ -1074,25 +1084,25 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function getDeliveryChallanDocument($inbound_plan_id, $shipment_id)
+    public function getDeliveryChallanDocument($inbound_plan_id = null, $shipment_id = null)
     {
         list($response) = $this->getDeliveryChallanDocumentWithHttpInfo($inbound_plan_id,  $shipment_id);
 
         return $response;
     }
 
-    public function getDeliveryChallanDocumentWithHttpInfo($inbound_plan_id, $shipment_id){
+    public function getDeliveryChallanDocumentWithHttpInfo($inbound_plan_id = null, $shipment_id = null){
         $request = $this->getDeliveryChallanDocumentRequest($inbound_plan_id, $shipment_id);
 
         return $this->sendRequest($request, GetDeliveryChallanDocumentResponse::class);
     }
 
-    protected function getDeliveryChallanDocumentRequest($inbound_plan_id,  $shipment_id)
+    protected function getDeliveryChallanDocumentRequest($inbound_plan_id = null,  $shipment_id = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling getDeliveryChallanDocument');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getDeliveryChallanDocument');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryChallanDocument';
@@ -1114,25 +1124,25 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function listDeliveryWindowOptions($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    public function listDeliveryWindowOptions($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null){
+    public function listDeliveryWindowOptionsWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListDeliveryWindowOptionsResponse::class);
     }
 
-    protected function listDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    protected function listDeliveryWindowOptionsRequest($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listDeliveryWindowOptions');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling listDeliveryWindowOptions');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/deliveryWindowOptions';
@@ -1164,27 +1174,27 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function generateDeliveryWindowOptions($inbound_plan_id, $shipment_id)
+    public function generateDeliveryWindowOptions($inbound_plan_id = null, $shipment_id = null)
     {
         list($response) = $this->generateDeliveryWindowOptionsWithHttpInfo($inbound_plan_id,  $shipment_id);
 
         return $response;
     }
 
-     public function generateDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id)
+     public function generateDeliveryWindowOptionsWithHttpInfo($inbound_plan_id = null, $shipment_id = null)
     {
         $request = $this->generateDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id);
 
         return $this->sendRequest($request, GenerateDeliveryWindowOptionsResponse::class);
     }
 
-    protected function generateDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id)
+    protected function generateDeliveryWindowOptionsRequest($inbound_plan_id = null, $shipment_id = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generateDeliveryWindowOptions');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling generateDeliveryWindowOptions');
         }
 
@@ -1208,30 +1218,30 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function confirmDeliveryWindowOptions($inbound_plan_id, $shipment_id, $delivery_window_option_id)
+    public function confirmDeliveryWindowOptions($inbound_plan_id = null, $shipment_id = null, $delivery_window_option_id = null)
     {
         list($response) = $this->confirmDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id, $delivery_window_option_id);
 
         return $response;
     }
 
-    public function confirmDeliveryWindowOptionsWithHttpInfo($inbound_plan_id, $shipment_id, $delivery_window_option_id)
+    public function confirmDeliveryWindowOptionsWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $delivery_window_option_id = null)
     {
         $request = $this->confirmDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id, $delivery_window_option_id);
 
         return $this->sendRequest($request, ConfirmDeliveryWindowOptionsResponse::class);
     }
 
-    protected function confirmDeliveryWindowOptionsRequest($inbound_plan_id, $shipment_id, $delivery_window_option_id)
+    protected function confirmDeliveryWindowOptionsRequest($inbound_plan_id = null, $shipment_id = null, $delivery_window_option_id = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling confirmDeliveryWindowOptions');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling confirmDeliveryWindowOptions');
         }
-        if (null === $delivery_window_option_id) {
+        if (empty($delivery_window_option_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $delivery_window_option_id when calling confirmDeliveryWindowOptions');
         }
 
@@ -1261,25 +1271,25 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function listShipmentItems($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    public function listShipmentItems($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listShipmentItemsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listShipmentItemsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null){
+    public function listShipmentItemsWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listShipmentItemsRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListShipmentItemsResponse::class);
     }
 
-    protected function listShipmentItemsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    protected function listShipmentItemsRequest($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listShipmentItems');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling listShipmentItems');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/items';
@@ -1311,30 +1321,30 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function updateShipmentName($inbound_plan_id, $shipment_id, $body)
+    public function updateShipmentName($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         list($response) = $this->updateShipmentNameWithHttpInfo($inbound_plan_id, $shipment_id, $body);
 
         return $response;
     }
 
-    public function updateShipmentNameWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    public function updateShipmentNameWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         $request = $this->updateShipmentNameRequest($inbound_plan_id, $shipment_id, $body);
 
         return $this->sendRequest($request, UpdateShipmentNameResponse::class);
     }
 
-    protected function updateShipmentNameRequest($inbound_plan_id, $shipment_id, $body)
+    protected function updateShipmentNameRequest($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling updateShipmentName');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling updateShipmentName');
         }
 
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling updateShipmentName');
         }
 
@@ -1358,25 +1368,25 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
-    public function listShipmentPallets($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    public function listShipmentPallets($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->listShipmentPalletsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function listShipmentPalletsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null){
+    public function listShipmentPalletsWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null){
         $request = $this->listShipmentPalletsRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, ListShipmentPalletsResponse::class);
     }
 
-    protected function listShipmentPalletsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    protected function listShipmentPalletsRequest($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listShipmentPallets');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling listShipmentPallets');
         }
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/shipments/{shipmentId}/pallets';
@@ -1406,29 +1416,29 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function cancelSelfShipAppointment($inbound_plan_id, $shipment_id, $body)
+    public function cancelSelfShipAppointment($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         list($response) = $this->cancelSelfShipAppointmentWithHttpInfo($inbound_plan_id, $shipment_id, $body);
 
         return $response;
     }
 
-    public function cancelSelfShipAppointmentWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    public function cancelSelfShipAppointmentWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         $request = $this->cancelSelfShipAppointmentRequest($inbound_plan_id, $shipment_id, $body);
 
         return $this->sendRequest($request, CancelSelfShipAppointmentResponse::class);
     }
 
-    protected function cancelSelfShipAppointmentRequest($inbound_plan_id, $shipment_id, $body)
+    protected function cancelSelfShipAppointmentRequest($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling cancelSelfShipAppointment');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling cancelSelfShipAppointment');
         }
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling cancelSelfShipAppointment');
         }
 
@@ -1452,26 +1462,26 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
-    public function getSelfShipAppointmentSlots($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    public function getSelfShipAppointmentSlots($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
         list($response) = $this->getSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $response;
     }
 
-    public function getSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    public function getSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
         $request = $this->getSelfShipAppointmentSlotsRequest($inbound_plan_id, $shipment_id, $page_size, $pagination_token);
 
         return $this->sendRequest($request, GetSelfShipAppointmentSlotsResponse::class);
     }
 
-    protected function getSelfShipAppointmentSlotsRequest($inbound_plan_id, $shipment_id, $page_size = null, $pagination_token = null)
+    protected function getSelfShipAppointmentSlotsRequest($inbound_plan_id = null, $shipment_id = null, $page_size = null, $pagination_token = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling getSelfShipAppointmentSlots');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getSelfShipAppointmentSlots');
         }
 
@@ -1503,30 +1513,30 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function generateSelfShipAppointmentSlots($inbound_plan_id, $shipment_id, $body)
+    public function generateSelfShipAppointmentSlots($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         list($response) = $this->generateSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id, $shipment_id, $body);
 
         return $response;
     }
 
-    public function generateSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    public function generateSelfShipAppointmentSlotsWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         $request = $this->generateSelfShipAppointmentSlotsRequest($inbound_plan_id, $shipment_id, $body);
 
         return $this->sendRequest($request, GenerateSelfShipAppointmentSlotsResponse::class);
     }
 
-    protected function generateSelfShipAppointmentSlotsRequest($inbound_plan_id, $shipment_id, $body)
+    protected function generateSelfShipAppointmentSlotsRequest($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generateSelfShipAppointmentSlots');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling generateSelfShipAppointmentSlots');
         }
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling generateSelfShipAppointmentSlots');
         }
 
@@ -1550,32 +1560,32 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function scheduleSelfShipAppointment($inbound_plan_id, $shipment_id, $slot_id, $body)
+    public function scheduleSelfShipAppointment($inbound_plan_id = null, $shipment_id = null, $slot_id = null, $body = null)
     {
         list($response) = $this->scheduleSelfShipAppointmentWithHttpInfo($inbound_plan_id, $shipment_id, $slot_id, $body);
 
         return $response;
     }
 
-    public function scheduleSelfShipAppointmentWithHttpInfo($inbound_plan_id, $shipment_id, $slot_id, $body)
+    public function scheduleSelfShipAppointmentWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $slot_id = null, $body = null)
     {
         $request = $this->scheduleSelfShipAppointmentRequest($inbound_plan_id, $shipment_id, $slot_id, $body);
 
         return $this->sendRequest($request, ScheduleSelfShipAppointmentResponse::class);
     }
 
-    protected function scheduleSelfShipAppointmentRequest($inbound_plan_id, $shipment_id, $slot_id, $body)
+    protected function scheduleSelfShipAppointmentRequest($inbound_plan_id = null, $shipment_id = null, $slot_id = null, $body = null)
     {
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling scheduleSelfShipAppointment');
         }
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling scheduleSelfShipAppointment');
         }
-        if (null === $slot_id) {
+        if (empty($slot_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $slot_id when calling scheduleSelfShipAppointment');
         }
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling scheduleSelfShipAppointment');
         }
 
@@ -1604,32 +1614,32 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function updateShipmentSourceAddress($inbound_plan_id, $shipment_id, $body)
+    public function updateShipmentSourceAddress($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         list($response) = $this->updateShipmentSourceAddressWithHttpInfo($inbound_plan_id, $shipment_id, $body);
 
         return $response;
     }
 
-    public function updateShipmentSourceAddressWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    public function updateShipmentSourceAddressWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         $request = $this->updateShipmentSourceAddressRequest($inbound_plan_id, $shipment_id, $body);
 
         return $this->sendRequest($request, UpdateShipmentSourceAddressResponse::class);
     }
 
-    protected function updateShipmentSourceAddressRequest($inbound_plan_id, $shipment_id, $body)
+    protected function updateShipmentSourceAddressRequest($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling updateShipmentSourceAddress');
         }
 
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling updateShipmentSourceAddress');
         }
 
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling updateShipmentSourceAddress');
         }
 
@@ -1653,32 +1663,32 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
-    public function updateShipmentTrackingDetails($inbound_plan_id, $shipment_id, $body)
+    public function updateShipmentTrackingDetails($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         list($response) = $this->updateShipmentTrackingDetailsWithHttpInfo($inbound_plan_id, $shipment_id, $body);
 
         return $response;
     }
 
-    public function updateShipmentTrackingDetailsWithHttpInfo($inbound_plan_id, $shipment_id, $body)
+    public function updateShipmentTrackingDetailsWithHttpInfo($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         $request = $this->updateShipmentTrackingDetailsRequest($inbound_plan_id, $shipment_id, $body);
 
         return $this->sendRequest($request, UpdateShipmentTrackingDetailsResponse::class);
     }
 
-    protected function updateShipmentTrackingDetailsRequest($inbound_plan_id, $shipment_id, $body)
+    protected function updateShipmentTrackingDetailsRequest($inbound_plan_id = null, $shipment_id = null, $body = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling updateShipmentTrackingDetails');
         }
 
-        if (null === $shipment_id) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling updateShipmentTrackingDetails');
         }
 
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling updateShipmentTrackingDetails');
         }
 
@@ -1702,34 +1712,75 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
     }
 
-    public function listTransportationOptions($inbound_plan_id, $page_size = null, $pagination_token = null, $placement_option_id = null, $shipment_id = null)
+    public function listTransportationOptions($inbound_plan_id = null, $page_size = null, $pagination_token = null, $placement_option_id = null, $shipment_id = null)
     {
-        // list($response) = $this->listTransportationOptionsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token, $placement_option_id, $shipment_id);
+        list($response) = $this->listTransportationOptionsWithHttpInfo($inbound_plan_id, $page_size, $pagination_token, $placement_option_id, $shipment_id);
 
-        // return $response;
+        return $response;
     }
 
-    public function generateTransportationOptions($inbound_plan_id, $body)
+    public function listTransportationOptionsWithHttpInfo($inbound_plan_id = null, $page_size = null, $pagination_token = null, $placement_option_id = null, $shipment_id = null){
+        $request = $this->listTransportationOptionsRequest($inbound_plan_id, $page_size, $pagination_token, $placement_option_id, $shipment_id);
+
+        return $this->sendRequest($request, ListTransportationOptionsResponse::class);
+    }
+
+    protected function listTransportationOptionsRequest($inbound_plan_id = null, $page_size = null, $pagination_token = null, $placement_option_id = null, $shipment_id = null)
+    {
+        if (empty($inbound_plan_id)) {
+            throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling listTransportationOptions');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/transportationOptions';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{inboundPlanId}',
+            ObjectSerializer::toPathValue($inbound_plan_id),
+            $resourcePath
+        );
+        // query params
+        if (null !== $page_size) {
+            $queryParams['pageSize'] = ObjectSerializer::toQueryValue($page_size);
+        }
+        // query params
+        if (null !== $pagination_token) {
+            $queryParams['paginationToken'] = ObjectSerializer::toQueryValue($pagination_token);
+        }
+        // query params
+        if (null !== $placement_option_id) {
+            $queryParams['placementOptionId'] = ObjectSerializer::toQueryValue($placement_option_id);
+        }
+        // query params
+        if (null !== $shipment_id) {
+            $queryParams['shipmentId'] = ObjectSerializer::toQueryValue($shipment_id);
+        }
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
+    }
+
+    public function generateTransportationOptions($inbound_plan_id = null, $body = null)
     {
         list($response) = $this->generateTransportationOptionsWithHttpInfo($inbound_plan_id, $body);
 
         return $response;
     }
 
-    public function generateTransportationOptionsWithHttpInfo($inbound_plan_id, $body)
+    public function generateTransportationOptionsWithHttpInfo($inbound_plan_id = null, $body = null)
     {
         $request = $this->generateTransportationOptionsRequest($inbound_plan_id, $body);
 
         return $this->sendRequest($request, GenerateTransportationOptionsResponse::class);
     }
 
-    protected function generateTransportationOptionsRequest($inbound_plan_id, $body)
+    protected function generateTransportationOptionsRequest($inbound_plan_id = null, $body = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generateTransportationOptions');
         }
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling generateTransportationOptions');
         }
 
@@ -1749,28 +1800,28 @@ class FulfillmentInboundApi
     }
 
 
-    public function confirmTransportationOptions($inbound_plan_id, $body)
+    public function confirmTransportationOptions($inbound_plan_id = null, $body = null)
     {
         list($response) = $this->confirmTransportationOptionsWithHttpInfo($inbound_plan_id, $body);
 
         return $response;
     }
 
-    public function confirmTransportationOptionsWithHttpInfo($inbound_plan_id, $body)
+    public function confirmTransportationOptionsWithHttpInfo($inbound_plan_id = null, $body = null)
     {
         $request = $this->confirmTransportationOptionsRequest($inbound_plan_id, $body);
 
         return $this->sendRequest($request, ConfirmTransportationOptionsResponse::class);
     }
 
-    protected function confirmTransportationOptionsRequest($inbound_plan_id, $body)
+    protected function confirmTransportationOptionsRequest($inbound_plan_id = null, $body = null)
     {
         // verify the required parameter 'body' is set
-        if (null === $inbound_plan_id) {
+        if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling confirmTransportationOptions');
         }
 
-        if (null === $body || (is_array($body) && 0 === count($body))) {
+        if (empty($body)) {
             throw new \InvalidArgumentException('Missing the required parameter $body when calling confirmTransportationOptions');
         }
 
@@ -1789,60 +1840,167 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }
 
-    public function listItemComplianceDetails($mskus, $marketplace_id)
+    public function listItemComplianceDetails($mskus = null, $marketplace_id = null)
     {
-        // list($response) = $this->listItemComplianceDetailsWithHttpInfo($mskus, $marketplace_id);
+        list($response) = $this->listItemComplianceDetailsWithHttpInfo($mskus, $marketplace_id);
 
-        // return $response;
+        return $response;
     }
 
-    public function updateItemComplianceDetails($marketplace_id, $body)
-    {
-        // list($response) = $this->updateItemComplianceDetailsWithHttpInfo($marketplace_id, $body);
+    public function listItemComplianceDetailsWithHttpInfo($mskus = null, $marketplace_id = null){
+        $request = $this->listItemComplianceDetailsRequest($mskus, $marketplace_id);
 
-        // return $response;
+        return $this->sendRequest($request, ListItemComplianceDetailsResponse::class);
     }
 
-    public function createMarketplaceItemLabels($body)
+    protected function listItemComplianceDetailsRequest($mskus = null, $marketplace_id = null)
     {
-        // list($response) = $this->createMarketplaceItemLabelsWithHttpInfo($body);
-
-        // return $response;
+        if (empty($mskus) || !is_array($mskus)) {
+            throw new \InvalidArgumentException('Missing the required parameter $mskus when calling listItemComplianceDetails');
+        }
+        if (empty($marketplace_id)) {
+            throw new \InvalidArgumentException('Missing the required parameter $marketplace_id when calling listItemComplianceDetails');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/items/compliance';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        
+        // query params
+        $queryParams['mskus'] = ObjectSerializer::toQueryValue($mskus);
+        $queryParams['marketplace_id'] = ObjectSerializer::toQueryValue($marketplace_id);
+        
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function getInboundOperationStatus($operation_id)
+    public function updateItemComplianceDetails($marketplace_id = null, $body = null)
     {
-        // list($response) = $this->getInboundOperationStatusWithHttpInfo($operation_id);
+        list($response) = $this->updateItemComplianceDetailsWithHttpInfo($marketplace_id, $body);
 
-        // return $response;
+        return $response;
     }
 
-    public function getLabels($shipment_id, $page_type, $label_type, $number_of_packages = null, $package_labels_to_print = null, $number_of_pallets = null, $page_size = null, $page_start_index = null)
+    public function updateItemComplianceDetailsWithHttpInfo($marketplace_id = null, $body = null)
+    {
+        $request = $this->updateItemComplianceDetailsRequest($marketplace_id, $body);
+
+        return $this->sendRequest($request, UpdateItemComplianceDetailsResponse::class);
+    }
+
+    protected function updateItemComplianceDetailsRequest($marketplace_id = null, $body = null)
+    {
+        if (empty($marketplace_id)) {
+            throw new \InvalidArgumentException('Missing the required parameter $marketplace_id when calling updateItemComplianceDetails');
+        }
+
+        if (empty($body)) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling updateItemComplianceDetails');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/items/compliance';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+
+        $queryParams['marketplaceId'] = ObjectSerializer::toQueryValue($marketplace_id);
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'PUT', $httpBody);
+    }
+
+    public function createMarketplaceItemLabels($body = null)
+    {
+        list($response) = $this->createMarketplaceItemLabelsWithHttpInfo($body);
+
+        return $response;
+    }
+
+    public function createMarketplaceItemLabelsWithHttpInfo($body = null)
+    {
+        $request = $this->createMarketplaceItemLabelsRequest($body);
+
+        return $this->sendRequest($request, CreateMarketplaceItemLabelsResponse::class);
+    }
+
+    protected function createMarketplaceItemLabelsRequest($body = null)
+    {
+        // verify the required parameter 'body' is set
+        if (empty($body)) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling createMarketplaceItemLabels');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/items/labels';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
+    }
+
+    public function getInboundOperationStatus($operation_id = null)
+    {
+        list($response) = $this->getInboundOperationStatusWithHttpInfo($operation_id);
+
+        return $response;
+    }
+
+    public function getInboundOperationStatusWithHttpInfo($operation_id = null){
+        $request = $this->getInboundOperationStatusRequest($operation_id);
+
+        return $this->sendRequest($request, GetInboundOperationStatusResponse::class);
+    }
+
+    protected function getInboundOperationStatusRequest($operation_id = null)
+    {
+        if (empty($operation_id)) {
+            throw new \InvalidArgumentException('Missing the required parameter $operation_id when calling getInboundOperationStatus');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/operations/{operationId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        $resourcePath = str_replace(
+            '{operationId}',
+            ObjectSerializer::toPathValue($operation_id),
+            $resourcePath
+        );
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
+    }
+
+    public function getLabels($shipment_id = null, $page_type = null, $label_type = null, $number_of_packages = null, $package_labels_to_print = null, $number_of_pallets = null, $page_size = null, $page_start_index = null)
     {
         list($response) = $this->getLabelsWithHttpInfo($shipment_id, $page_type, $label_type, $number_of_packages, $package_labels_to_print, $number_of_pallets, $page_size, $page_start_index);
 
         return $response;
     }
 
-    public function getLabelsWithHttpInfo($shipment_id, $page_type, $label_type, $number_of_packages = null, $package_labels_to_print = null, $number_of_pallets = null, $page_size = null, $page_start_index = null)
+    public function getLabelsWithHttpInfo($shipment_id = null, $page_type = null, $label_type = null, $number_of_packages = null, $package_labels_to_print = null, $number_of_pallets = null, $page_size = null, $page_start_index = null)
     {
         $request = $this->getLabelsRequest($shipment_id, $page_type, $label_type, $number_of_packages, $package_labels_to_print, $number_of_pallets, $page_size, $page_start_index);
 
         return $this->sendRequest($request, GetLabelsResponse::class);
     }
 
-    protected function getLabelsRequest($shipment_id, $page_type, $label_type, $number_of_packages = null, $package_labels_to_print = null, $number_of_pallets = null, $page_size = null, $page_start_index = null)
+    protected function getLabelsRequest($shipment_id = null, $page_type = null, $label_type = null, $number_of_packages = null, $package_labels_to_print = null, $number_of_pallets = null, $page_size = null, $page_start_index = null)
     {
         // verify the required parameter 'shipment_id' is set
-        if (null === $shipment_id || (is_array($shipment_id) && 0 === count($shipment_id))) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getLabels');
         }
         // verify the required parameter 'page_type' is set
-        if (null === $page_type || (is_array($page_type) && 0 === count($page_type))) {
+        if (empty($page_type)) {
             throw new \InvalidArgumentException('Missing the required parameter $page_type when calling getLabels');
         }
         // verify the required parameter 'label_type' is set
-        if (null === $label_type || (is_array($label_type) && 0 === count($label_type))) {
+        if (empty($label_type)) {
             throw new \InvalidArgumentException('Missing the required parameter $label_type when calling getLabels');
         }
 
@@ -1897,24 +2055,24 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
-    public function getBillOfLading($shipment_id)
+    public function getBillOfLading($shipment_id = null)
     {
         list($response) = $this->getBillOfLadingWithHttpInfo($shipment_id);
 
         return $response;
     }
 
-    public function getBillOfLadingWithHttpInfo($shipment_id)
+    public function getBillOfLadingWithHttpInfo($shipment_id = null)
     {
         $request = $this->getBillOfLadingRequest($shipment_id);
 
         return $this->sendRequest($request, GetBillOfLadingResponse::class);
     }
 
-    protected function getBillOfLadingRequest($shipment_id)
+    protected function getBillOfLadingRequest($shipment_id = null)
     {
         // verify the required parameter 'shipment_id' is set
-        if (null === $shipment_id || (is_array($shipment_id) && 0 === count($shipment_id))) {
+        if (empty($shipment_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $shipment_id when calling getBillOfLading');
         }
 
