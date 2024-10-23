@@ -163,6 +163,7 @@ class ConfirmShipmentContentUpdatePreviewResponse implements ModelInterface, Arr
     public function __construct(array $data = null)
     {
         $this->container['operation_id'] = isset($data['operation_id']) ? $data['operation_id'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -202,6 +203,20 @@ class ConfirmShipmentContentUpdatePreviewResponse implements ModelInterface, Arr
 
         return $this;
     }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
+
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

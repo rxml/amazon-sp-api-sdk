@@ -169,6 +169,7 @@ class ListPlacementOptionsResponse implements ModelInterface, ArrayAccess
     {
         $this->container['placement_options'] = isset($data['placement_options']) ? $data['placement_options'] : null;
         $this->container['pagination'] = isset($data['pagination']) ? $data['pagination'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -217,6 +218,20 @@ class ListPlacementOptionsResponse implements ModelInterface, ArrayAccess
 
         return $this;
     }
+    
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
+
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

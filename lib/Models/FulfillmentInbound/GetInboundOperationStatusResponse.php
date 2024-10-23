@@ -178,6 +178,7 @@ class GetInboundOperationStatusResponse implements ModelInterface, ArrayAccess
         $this->container['operation_id'] = isset($data['operation_id']) ? $data['operation_id'] : null;
         $this->container['operation_problems'] = isset($data['operation_problems']) ? $data['operation_problems'] : null;
         $this->container['operation_status'] = isset($data['operation_status']) ? $data['operation_status'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -259,6 +260,19 @@ class GetInboundOperationStatusResponse implements ModelInterface, ArrayAccess
     public function setOperationStatus($operation_status)
     {
         $this->container['operation_status'] = $operation_status;
+
+        return $this;
+    }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }

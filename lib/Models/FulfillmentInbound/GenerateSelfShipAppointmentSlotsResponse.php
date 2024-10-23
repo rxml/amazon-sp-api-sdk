@@ -163,6 +163,7 @@ class GenerateSelfShipAppointmentSlotsResponse implements ModelInterface, ArrayA
     public function __construct(array $data = null)
     {
         $this->container['operation_id'] = isset($data['operation_id']) ? $data['operation_id'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -199,6 +200,19 @@ class GenerateSelfShipAppointmentSlotsResponse implements ModelInterface, ArrayA
     public function setOperationId($operation_id)
     {
         $this->container['operation_id'] = $operation_id;
+
+        return $this;
+    }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }

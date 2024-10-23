@@ -179,6 +179,7 @@ class GetShipmentContentUpdatePreviewResponse implements ModelInterface, ArrayAc
         $this->container['expiration'] = isset($data['expiration']) ? $data['expiration'] : null;
         $this->container['requested_updates'] = isset($data['requested_updates']) ? $data['requested_updates'] : null;
         $this->container['transportation_option'] = isset($data['transportation_option']) ? $data['transportation_option'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
         
     }
 
@@ -263,6 +264,20 @@ class GetShipmentContentUpdatePreviewResponse implements ModelInterface, ArrayAc
 
         return $this;
     }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
+
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

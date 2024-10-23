@@ -169,6 +169,7 @@ class ListDeliveryWindowOptionsResponse implements ModelInterface, ArrayAccess
     {
         $this->container['delivery_window_options'] = isset($data['delivery_window_options']) ? $data['delivery_window_options'] : null;
         $this->container['pagination'] = isset($data['pagination']) ? $data['pagination'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -219,6 +220,20 @@ class ListDeliveryWindowOptionsResponse implements ModelInterface, ArrayAccess
 
         return $this;
     }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
+
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

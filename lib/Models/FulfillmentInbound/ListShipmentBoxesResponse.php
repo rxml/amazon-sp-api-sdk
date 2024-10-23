@@ -169,6 +169,7 @@ class ListShipmentBoxesResponse implements ModelInterface, ArrayAccess
     {
         $this->container['boxes'] = isset($data['boxes']) ? $data['boxes'] : null;
         $this->container['pagination'] = isset($data['pagination']) ? $data['pagination'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -219,6 +220,20 @@ class ListShipmentBoxesResponse implements ModelInterface, ArrayAccess
 
         return $this;
     }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
+
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

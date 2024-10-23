@@ -163,6 +163,7 @@ class ListItemComplianceDetailsResponse implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['compliance_details'] = isset($data['compliance_details']) ? $data['compliance_details'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -198,6 +199,19 @@ class ListItemComplianceDetailsResponse implements ModelInterface, ArrayAccess
     public function setComplianceDetails($compliance_details)
     {
         $this->container['compliance_details'] = $compliance_details;
+
+        return $this;
+    }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }

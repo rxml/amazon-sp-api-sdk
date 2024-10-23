@@ -217,6 +217,7 @@ class GetInboundPlanResponse implements ModelInterface, ArrayAccess
         $this->container['shipments'] = isset($data['shipments']) ? $data['shipments'] : null;
         $this->container['source_address'] = isset($data['source_address']) ? $data['source_address'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -361,6 +362,20 @@ class GetInboundPlanResponse implements ModelInterface, ArrayAccess
 
         return $this;
     }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
+
+        return $this;
+    }
+
     /**
      * Returns true if offset exists. False otherwise.
      *

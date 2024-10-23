@@ -169,6 +169,7 @@ class ListPackingOptionsResponse implements ModelInterface, ArrayAccess
     {
         $this->container['packing_options'] = isset($data['packing_options']) ? $data['packing_options'] : null;
         $this->container['pagination'] = isset($data['pagination']) ? $data['pagination'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -214,6 +215,18 @@ class ListPackingOptionsResponse implements ModelInterface, ArrayAccess
     public function setPagination($pagination)
     {
         $this->container['pagination'] = $pagination;
+
+        return $this;
+    }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }

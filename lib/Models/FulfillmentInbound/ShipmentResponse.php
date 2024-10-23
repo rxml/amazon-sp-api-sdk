@@ -247,6 +247,8 @@ class ShipmentResponse implements ModelInterface, ArrayAccess
         $this->container['source'] = isset($data['source']) ? $data['source'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
         $this->container['tracking_details'] = isset($data['tracking_details']) ? $data['tracking_details'] : null;
+
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -462,6 +464,20 @@ class ShipmentResponse implements ModelInterface, ArrayAccess
 
         return $this;
     }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
+
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

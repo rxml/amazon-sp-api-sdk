@@ -169,6 +169,7 @@ class GetSelfShipAppointmentSlotsResponse implements ModelInterface, ArrayAccess
     {
         $this->container['self_ship_appointment_slots_availability'] = isset($data['self_ship_appointment_slots_availability']) ? $data['self_ship_appointment_slots_availability'] : null;
         $this->container['pagination'] = isset($data['pagination']) ? $data['pagination'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -216,6 +217,19 @@ class GetSelfShipAppointmentSlotsResponse implements ModelInterface, ArrayAccess
     public function setPagination($pagination)
     {
         $this->container['pagination'] = $pagination;
+
+        return $this;
+    }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }

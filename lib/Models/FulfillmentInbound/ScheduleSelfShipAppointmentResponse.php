@@ -163,6 +163,7 @@ class ScheduleSelfShipAppointmentResponse implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['self_ship_appointment_details'] = isset($data['self_ship_appointment_details']) ? $data['self_ship_appointment_details'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -199,6 +200,19 @@ class ScheduleSelfShipAppointmentResponse implements ModelInterface, ArrayAccess
     public function setSelfShipAppointmentDetails($self_ship_appointment_details)
     {
         $this->container['self_ship_appointment_details'] = $self_ship_appointment_details;
+
+        return $this;
+    }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }

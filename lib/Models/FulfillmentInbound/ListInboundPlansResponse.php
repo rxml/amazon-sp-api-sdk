@@ -169,6 +169,7 @@ class ListInboundPlansResponse implements ModelInterface, ArrayAccess
     {
         $this->container['inbound_plans'] = isset($data['inbound_plans']) ? $data['inbound_plans'] : null;
         $this->container['pagination'] = isset($data['pagination']) ? $data['pagination'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -214,6 +215,19 @@ class ListInboundPlansResponse implements ModelInterface, ArrayAccess
     public function setPagination($pagination)
     {
         $this->container['pagination'] = $pagination;
+
+        return $this;
+    }
+
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+    
+
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }
