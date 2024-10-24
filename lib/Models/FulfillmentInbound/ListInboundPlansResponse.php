@@ -48,6 +48,7 @@ class ListInboundPlansResponse implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'inbound_plans' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\InboundPlanSummaryList',
         'pagination' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Pagination',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -58,6 +59,7 @@ class ListInboundPlansResponse implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'inbound_plans' => null,
         'pagination' => null,
+        'errors' => null,
     ];
 
     /**
@@ -88,7 +90,8 @@ class ListInboundPlansResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'inbound_plans' => 'inboundPlans',
-        'pagination' => 'pagination',    
+        'pagination' => 'pagination',  
+        'errors' => 'errors',  
     ];
 
     /**
@@ -98,7 +101,8 @@ class ListInboundPlansResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'inbound_plans' => 'setInboundPlans',
-        'pagination' => 'setPagination',    
+        'pagination' => 'setPagination',  
+        'errors' => 'setErrors',  
     ];
 
     /**
@@ -108,7 +112,8 @@ class ListInboundPlansResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'inbound_plans' => 'getInboundPlans',
-        'pagination' => 'getPagination',       
+        'pagination' => 'getPagination', 
+        'errors' => 'getErrors',      
     ];
 
     /**

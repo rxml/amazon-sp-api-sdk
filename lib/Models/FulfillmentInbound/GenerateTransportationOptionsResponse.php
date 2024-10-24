@@ -46,7 +46,8 @@ class GenerateTransportationOptionsResponse implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'operation_id' => 'string',    
+        'operation_id' => 'string', 
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',   
     ];
 
     /**
@@ -55,7 +56,8 @@ class GenerateTransportationOptionsResponse implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'operation_id' => null,    
+        'operation_id' => null,   
+        'errors' => null, 
     ];
 
     /**
@@ -85,7 +87,8 @@ class GenerateTransportationOptionsResponse implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $attributeMap = [
-        'operation_id' => 'operationId',    
+        'operation_id' => 'operationId', 
+        'errors' => 'errors',   
     ];
 
     /**
@@ -94,7 +97,8 @@ class GenerateTransportationOptionsResponse implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $setters = [
-        'operation_id' => 'setOperationId',    
+        'operation_id' => 'setOperationId',  
+        'errors' => 'setErrors',  
     ];
 
     /**
@@ -104,6 +108,7 @@ class GenerateTransportationOptionsResponse implements ModelInterface, ArrayAcce
      */
     protected static $getters = [
         'operation_id' => 'getOperationId',    
+        'errors' => 'getErrors',
     ];
 
     /**

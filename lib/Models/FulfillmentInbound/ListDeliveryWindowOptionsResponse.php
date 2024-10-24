@@ -48,6 +48,7 @@ class ListDeliveryWindowOptionsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'delivery_window_options' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\DeliveryWindowOptionList',
         'pagination' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Pagination',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -58,6 +59,7 @@ class ListDeliveryWindowOptionsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'delivery_window_options' => null,
         'pagination' => null,
+        'errors' => null,
     ];
 
     /**
@@ -89,6 +91,7 @@ class ListDeliveryWindowOptionsResponse implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'delivery_window_options' => 'deliveryWindowOptions',
         'pagination' => 'pagination',    
+        'errors' => 'errors',
     ];
 
     /**
@@ -99,6 +102,7 @@ class ListDeliveryWindowOptionsResponse implements ModelInterface, ArrayAccess
     protected static $setters = [
         'delivery_window_options' => 'setDeliveryWindowOptions',
         'pagination' => 'setPagination',    
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -108,7 +112,8 @@ class ListDeliveryWindowOptionsResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'delivery_window_options' => 'getDeliveryWindowOptions',
-        'pagination' => 'getPagination',       
+        'pagination' => 'getPagination',  
+        'errors' => 'getErrors',     
     ];
 
     /**

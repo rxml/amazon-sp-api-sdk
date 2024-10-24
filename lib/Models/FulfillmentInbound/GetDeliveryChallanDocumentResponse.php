@@ -47,6 +47,7 @@ class GetDeliveryChallanDocumentResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerTypes = [
         'document_download' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\DocumentDownload',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -56,6 +57,7 @@ class GetDeliveryChallanDocumentResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'document_download' => null,
+        'errors' => null,
     ];
 
     /**
@@ -86,6 +88,7 @@ class GetDeliveryChallanDocumentResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'document_download' => 'documentDownload',
+        'errors' => 'errors',
     ];
 
     /**
@@ -95,6 +98,7 @@ class GetDeliveryChallanDocumentResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'document_download' => 'setDocumentDownload', 
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -104,6 +108,7 @@ class GetDeliveryChallanDocumentResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'document_download' => 'getDocumentDownload',
+        'errors' => 'getErrors',
     ];
 
     /**

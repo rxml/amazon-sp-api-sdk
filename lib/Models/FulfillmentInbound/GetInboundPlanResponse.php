@@ -56,6 +56,7 @@ class GetInboundPlanResponse implements ModelInterface, ArrayAccess
         'shipments' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ShipmentSummaryList',    
         'source_address' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\AddressInput', 
         'status' => 'string',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -74,6 +75,7 @@ class GetInboundPlanResponse implements ModelInterface, ArrayAccess
         'shipments' => null,    
         'source_address' => null, 
         'status' => null,
+        'errors' => null,
     ];
 
     /**
@@ -113,6 +115,7 @@ class GetInboundPlanResponse implements ModelInterface, ArrayAccess
         'shipments' => 'shipments',    
         'source_address' => 'sourceAddress', 
         'status' => 'status',
+        'errors' => 'errors',
     ];
 
     /**
@@ -130,7 +133,8 @@ class GetInboundPlanResponse implements ModelInterface, ArrayAccess
         'placement_options' => 'setPlacementOptions',    
         'shipments' => 'setShipments',    
         'source_address' => 'setSourceAddress', 
-        'status' => 'setStatus',   
+        'status' => 'setStatus', 
+        'errors' => 'setErrors',  
     ];
 
     /**
@@ -148,7 +152,8 @@ class GetInboundPlanResponse implements ModelInterface, ArrayAccess
         'placement_options' => 'getPlacementOptions',    
         'shipments' => 'getShipments',    
         'source_address' => 'getSourceAddress', 
-        'status' => 'getStatus',   
+        'status' => 'getStatus',  
+        'errors' => 'getErrors', 
     ];
 
     /**

@@ -47,6 +47,7 @@ class GetInboundOperationStatusResponse implements ModelInterface, ArrayAccess
         'operation_id' => 'string',
         'operation_problems' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\OperationProblemList',
         'operation_status' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\OperationStatus',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -59,6 +60,7 @@ class GetInboundOperationStatusResponse implements ModelInterface, ArrayAccess
         'operation_id' => null,
         'operation_problems' => null,
         'operation_status' => null,
+        'errors' => null,
     ];
 
     /**
@@ -92,6 +94,7 @@ class GetInboundOperationStatusResponse implements ModelInterface, ArrayAccess
         'operation_id' => 'operationId',
         'operation_problems' => 'operationProblems',
         'operation_status' => 'operationStatus',
+        'errors' => 'errors',
     ];
 
     /**
@@ -104,6 +107,7 @@ class GetInboundOperationStatusResponse implements ModelInterface, ArrayAccess
         'operation_id' => 'setOperationId',
         'operation_problems' => 'setOperationProblems',
         'operation_status' => 'setOperationStatus',
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -116,6 +120,7 @@ class GetInboundOperationStatusResponse implements ModelInterface, ArrayAccess
         'operation_id' => 'getOperationId',
         'operation_problems' => 'getOperationProblems',
         'operation_status' => 'getOperationStatus',
+        'errors' => 'getErrors',
     ];
 
     /**

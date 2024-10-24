@@ -47,6 +47,7 @@ class GetShipmentContentUpdatePreviewResponse implements ModelInterface, ArrayAc
         'expiration' => 'string',
         'requested_updates' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\RequestedUpdates',
         'transportation_option' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\TransportationOption',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -59,6 +60,7 @@ class GetShipmentContentUpdatePreviewResponse implements ModelInterface, ArrayAc
         'expiration' => null,
         'requested_updates' => null,
         'transportation_option' => null,
+        'errors' => null,
     ];
 
     /**
@@ -92,6 +94,7 @@ class GetShipmentContentUpdatePreviewResponse implements ModelInterface, ArrayAc
         'expiration' => 'expiration',
         'requested_updates' => 'requestedUpdates',
         'transportation_option' => 'transportationOption',
+        'errors' => 'errors',
     ];
 
     /**
@@ -104,6 +107,7 @@ class GetShipmentContentUpdatePreviewResponse implements ModelInterface, ArrayAc
         'expiration' => 'setExpiration',
         'requested_updates' => 'setRequestedUpdates',
         'transportation_option' => 'setTransportationOption',
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -116,6 +120,7 @@ class GetShipmentContentUpdatePreviewResponse implements ModelInterface, ArrayAc
         'expiration' => 'getExpiration',
         'requested_updates' => 'getRequestedUpdates',
         'transportation_option' => 'getTransportationOption',
+        'errors' => 'getErrors',
     ];
 
     /**

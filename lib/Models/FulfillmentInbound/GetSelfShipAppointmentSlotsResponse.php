@@ -48,6 +48,7 @@ class GetSelfShipAppointmentSlotsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'self_ship_appointment_slots_availability' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\SelfShipAppointmentSlotsAvailability',
         'pagination' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Pagination',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -58,6 +59,7 @@ class GetSelfShipAppointmentSlotsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'self_ship_appointment_slots_availability' => null,
         'pagination' => null,
+        'errors' => null,
     ];
 
     /**
@@ -89,6 +91,7 @@ class GetSelfShipAppointmentSlotsResponse implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'self_ship_appointment_slots_availability' => 'selfShipAppointmentSlotsAvailability',
         'pagination' => 'pagination',    
+        'errors' => 'errors',
     ];
 
     /**
@@ -99,6 +102,7 @@ class GetSelfShipAppointmentSlotsResponse implements ModelInterface, ArrayAccess
     protected static $setters = [
         'self_ship_appointment_slots_availability' => 'setSelfShipAppointmentSlotsAvailability',
         'pagination' => 'setPagination',    
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -108,7 +112,8 @@ class GetSelfShipAppointmentSlotsResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'self_ship_appointment_slots_availability' => 'getSelfShipAppointmentSlotsAvailability',
-        'pagination' => 'getPagination',       
+        'pagination' => 'getPagination',    
+        'errors' => 'getErrors',   
     ];
 
     /**

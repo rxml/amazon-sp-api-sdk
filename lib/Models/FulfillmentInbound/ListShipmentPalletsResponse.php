@@ -48,6 +48,7 @@ class ListShipmentPalletsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'pallets' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\PalletNewList',
         'pagination' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Pagination',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -58,6 +59,7 @@ class ListShipmentPalletsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'pallets' => null,
         'pagination' => null,
+        'errors' => null,
     ];
 
     /**
@@ -88,7 +90,8 @@ class ListShipmentPalletsResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'pallets' => 'pallets',
-        'pagination' => 'pagination',    
+        'pagination' => 'pagination',   
+        'errors' => 'errors', 
     ];
 
     /**
@@ -98,7 +101,8 @@ class ListShipmentPalletsResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'pallets' => 'setPallets',
-        'pagination' => 'setPagination',    
+        'pagination' => 'setPagination',   
+        'errors' => 'setErrors', 
     ];
 
     /**
@@ -108,7 +112,8 @@ class ListShipmentPalletsResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'pallets' => 'getPallets',
-        'pagination' => 'getPagination',       
+        'pagination' => 'getPagination',    
+        'errors' => 'getErrors',   
     ];
 
     /**

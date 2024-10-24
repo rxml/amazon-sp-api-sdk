@@ -48,6 +48,7 @@ class CreateInboundPlanResponse implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'inbound_plan_id' => 'string',
         'operation_id' => 'string',    
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -57,7 +58,9 @@ class CreateInboundPlanResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'inbound_plan_id' => null,
-'operation_id' => null,    ];
+'operation_id' => null,    
+'errors' => null,    
+];
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -88,6 +91,7 @@ class CreateInboundPlanResponse implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'inbound_plan_id' => 'inboundPlanId',
         'operation_id' => 'operationId',    
+        'errors' => 'errors',    
     ];
 
     /**
@@ -98,6 +102,7 @@ class CreateInboundPlanResponse implements ModelInterface, ArrayAccess
     protected static $setters = [
         'inbound_plan_id' => 'setInboundPlanId',
         'operation_id' => 'setOperationId',    
+        'errors' => 'setErrors',    
     ];
 
     /**
@@ -107,7 +112,8 @@ class CreateInboundPlanResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'inbound_plan_id' => 'getInboundPlanId',
-        'operation_id' => 'getOperationId',    
+        'operation_id' => 'getOperationId',
+        'errors' => 'getErrors',        
     ];
 
     /**

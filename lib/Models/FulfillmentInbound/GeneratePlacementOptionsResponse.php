@@ -47,6 +47,7 @@ class GeneratePlacementOptionsResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerTypes = [
         'operation_id' => 'string',    
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -56,6 +57,7 @@ class GeneratePlacementOptionsResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'operation_id' => null,    
+        'errors' => null,
     ];
 
     /**
@@ -85,7 +87,8 @@ class GeneratePlacementOptionsResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'operation_id' => 'operationId',    
+        'operation_id' => 'operationId', 
+        'errors' => 'errors',   
     ];
 
     /**
@@ -94,7 +97,8 @@ class GeneratePlacementOptionsResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'operation_id' => 'setOperationId',    
+        'operation_id' => 'setOperationId', 
+        'errors' => 'setErrors',   
     ];
 
     /**
@@ -103,7 +107,8 @@ class GeneratePlacementOptionsResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'operation_id' => 'getOperationId',    
+        'operation_id' => 'getOperationId',   
+        'errors' => 'getErrors', 
     ];
 
     /**

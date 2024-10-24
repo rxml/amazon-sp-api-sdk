@@ -48,6 +48,7 @@ class ListPlacementOptionsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'placement_options' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\PlacementOptionList',    
         'pagination' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Pagination', 
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -58,6 +59,7 @@ class ListPlacementOptionsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'placement_options' => null,    
         'pagination' => null,    
+        'errors' => null,
     ];
 
     /**
@@ -89,6 +91,7 @@ class ListPlacementOptionsResponse implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'placement_options' => 'placementOptions',    
         'pagination' => 'pagination',
+        'errors' => 'errors',
     ];
 
     /**
@@ -99,6 +102,7 @@ class ListPlacementOptionsResponse implements ModelInterface, ArrayAccess
     protected static $setters = [
         'placement_options' => 'setPlacementOptions',    
         'pagination' => 'setPagination',
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -109,6 +113,7 @@ class ListPlacementOptionsResponse implements ModelInterface, ArrayAccess
     protected static $getters = [
         'placement_options' => 'getPlacementOptions',    
         'pagination' => 'getPagination',
+        'errors' => 'getErrors',
     ];
 
     /**

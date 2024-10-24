@@ -48,6 +48,7 @@ class ListTransportationOptionsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'transportation_options' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\TransportationOptionList',
         'pagination' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Pagination',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -58,6 +59,7 @@ class ListTransportationOptionsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'transportation_options' => null,
         'pagination' => null,
+        'errors' => null,
     ];
 
     /**
@@ -89,6 +91,7 @@ class ListTransportationOptionsResponse implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'transportation_options' => 'transportationOptions',
         'pagination' => 'pagination',    
+        'errors' => 'errors',
     ];
 
     /**
@@ -98,7 +101,8 @@ class ListTransportationOptionsResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'transportation_options' => 'setTransportationOptions',
-        'pagination' => 'setPagination',    
+        'pagination' => 'setPagination',  
+        'errors' => 'setErrors',  
     ];
 
     /**
@@ -108,7 +112,8 @@ class ListTransportationOptionsResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'transportation_options' => 'getTransportationOptions',
-        'pagination' => 'getPagination',       
+        'pagination' => 'getPagination',    
+        'errors' => 'getErrors',   
     ];
 
     /**

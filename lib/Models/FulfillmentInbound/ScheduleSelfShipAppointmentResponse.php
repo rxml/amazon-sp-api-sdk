@@ -47,6 +47,7 @@ class ScheduleSelfShipAppointmentResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerTypes = [
         'self_ship_appointment_details' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\SelfShipAppointmentDetails',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -56,6 +57,7 @@ class ScheduleSelfShipAppointmentResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'self_ship_appointment_details' => null,
+        'errors' => null,
     ];
 
     /**
@@ -86,6 +88,7 @@ class ScheduleSelfShipAppointmentResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'self_ship_appointment_details' => 'selfShipAppointmentDetails',
+        'errors' => 'errors',
     ];
 
     /**
@@ -94,7 +97,8 @@ class ScheduleSelfShipAppointmentResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'self_ship_appointment_details' => 'setSelfShipAppointmentDetails', 
+        'self_ship_appointment_details' => 'setSelfShipAppointmentDetails',
+        'errors' => 'setErrors', 
     ];
 
     /**
@@ -104,6 +108,7 @@ class ScheduleSelfShipAppointmentResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'self_ship_appointment_details' => 'getSelfShipAppointmentDetails',
+        'errors' => 'getErrors',
     ];
 
     /**

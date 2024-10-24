@@ -46,7 +46,8 @@ class ConfirmPackingOptionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'operation_id' => 'string',    
+        'operation_id' => 'string',  
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',  
     ];
 
     /**
@@ -56,6 +57,7 @@ class ConfirmPackingOptionResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'operation_id' => null, 
+        'errors' => null,
     ];
 
     /**
@@ -86,6 +88,7 @@ class ConfirmPackingOptionResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'operation_id' => 'operation_id',
+        'errors' => 'errors',
     ];
 
     /**
@@ -95,6 +98,7 @@ class ConfirmPackingOptionResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'operation_id' => 'setOperationId', 
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -104,6 +108,7 @@ class ConfirmPackingOptionResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'operation_id' => 'getOperationId',
+        'errors' => 'getErrors',
     ];
 
     /**

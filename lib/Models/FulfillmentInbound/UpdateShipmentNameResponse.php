@@ -47,6 +47,7 @@ class UpdateShipmentNameResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerTypes = [
         'name' => 'string',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -56,6 +57,7 @@ class UpdateShipmentNameResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'name' => null,
+        'errors' => null,
     ];
 
     /**
@@ -86,6 +88,7 @@ class UpdateShipmentNameResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'name' => 'name',
+        'errors' => 'errors',
     ];
 
     /**
@@ -95,6 +98,7 @@ class UpdateShipmentNameResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'name' => 'setName', 
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -104,6 +108,7 @@ class UpdateShipmentNameResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'name' => 'getName',
+        'errors' => 'getErrors',
     ];
 
     /**

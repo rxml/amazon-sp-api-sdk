@@ -47,6 +47,7 @@ class ListItemComplianceDetailsResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerTypes = [
         'compliance_details' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ComplianceDetailList',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -56,6 +57,7 @@ class ListItemComplianceDetailsResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'compliance_details' => null,
+        'errors' => null,
     ];
 
     /**
@@ -86,6 +88,7 @@ class ListItemComplianceDetailsResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'compliance_details' => 'complianceDetails',
+        'errors' => 'errors',
     ];
 
     /**
@@ -95,6 +98,7 @@ class ListItemComplianceDetailsResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'compliance_details' => 'setComplianceDetails', 
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -103,7 +107,8 @@ class ListItemComplianceDetailsResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'compliance_details' => 'getComplianceDetails',    
+        'compliance_details' => 'getComplianceDetails',   
+        'errors' => 'getErrors', 
     ];
 
     /**

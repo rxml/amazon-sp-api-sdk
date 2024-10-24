@@ -47,6 +47,7 @@ class GenerateDeliveryWindowOptionsResponse implements ModelInterface, ArrayAcce
      */
     protected static $swaggerTypes = [
         'operation_id' => 'string',    
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -55,7 +56,8 @@ class GenerateDeliveryWindowOptionsResponse implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'operation_id' => null,    
+        'operation_id' => null,   
+        'errors' => null, 
     ];
 
     /**
@@ -86,6 +88,7 @@ class GenerateDeliveryWindowOptionsResponse implements ModelInterface, ArrayAcce
      */
     protected static $attributeMap = [
         'operation_id' => 'operationId',    
+        'errors' => 'errors',
     ];
 
     /**
@@ -95,6 +98,7 @@ class GenerateDeliveryWindowOptionsResponse implements ModelInterface, ArrayAcce
      */
     protected static $setters = [
         'operation_id' => 'setOperationId',    
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -103,7 +107,8 @@ class GenerateDeliveryWindowOptionsResponse implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $getters = [
-        'operation_id' => 'getOperationId',    
+        'operation_id' => 'getOperationId',   
+        'errors' => 'getErrors', 
     ];
 
     /**

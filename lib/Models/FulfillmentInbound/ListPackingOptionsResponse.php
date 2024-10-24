@@ -48,6 +48,7 @@ class ListPackingOptionsResponse implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'packing_options' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\PackingOptionList',    
         'pagination' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Pagination', 
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -57,7 +58,8 @@ class ListPackingOptionsResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'packing_options' => null,    
-        'pagination' => null,    
+        'pagination' => null,  
+        'errors' => null,  
     ];
 
     /**
@@ -89,6 +91,7 @@ class ListPackingOptionsResponse implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'packing_options' => 'packingOptions',    
         'pagination' => 'pagination',
+        'errors' => 'errors',
     ];
 
     /**
@@ -99,6 +102,7 @@ class ListPackingOptionsResponse implements ModelInterface, ArrayAccess
     protected static $setters = [
         'packing_options' => 'setPackingOptions',    
         'pagination' => 'setPagination',
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -109,6 +113,7 @@ class ListPackingOptionsResponse implements ModelInterface, ArrayAccess
     protected static $getters = [
         'packing_options' => 'getPackingOptions',    
         'pagination' => 'getPagination',
+        'errors' => 'getErrors',
     ];
 
     /**

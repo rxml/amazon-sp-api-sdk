@@ -48,6 +48,7 @@ class ListShipmentContentUpdatePreviewsResponse implements ModelInterface, Array
     protected static $swaggerTypes = [
         'content_update_previews' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ContentUpdatePreviewList',
         'pagination' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\Pagination',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -58,6 +59,7 @@ class ListShipmentContentUpdatePreviewsResponse implements ModelInterface, Array
     protected static $swaggerFormats = [
         'boxes' => null,
         'pagination' => null,
+        'errors' => null,
     ];
 
     /**
@@ -88,7 +90,8 @@ class ListShipmentContentUpdatePreviewsResponse implements ModelInterface, Array
      */
     protected static $attributeMap = [
         'boxes' => 'boxes',
-        'pagination' => 'pagination',    
+        'pagination' => 'pagination',  
+        'errors' => 'errors',  
     ];
 
     /**
@@ -98,7 +101,8 @@ class ListShipmentContentUpdatePreviewsResponse implements ModelInterface, Array
      */
     protected static $setters = [
         'boxes' => 'setBoxes',
-        'pagination' => 'setPagination',    
+        'pagination' => 'setPagination', 
+        'errors' => 'setErrors',   
     ];
 
     /**
@@ -108,7 +112,8 @@ class ListShipmentContentUpdatePreviewsResponse implements ModelInterface, Array
      */
     protected static $getters = [
         'boxes' => 'getBoxes',
-        'pagination' => 'getPagination',       
+        'pagination' => 'getPagination',     
+        'errors' => 'getErrors',  
     ];
 
     /**

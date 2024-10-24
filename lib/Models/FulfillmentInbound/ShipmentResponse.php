@@ -61,6 +61,7 @@ class ShipmentResponse implements ModelInterface, ArrayAccess
         'source' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ShipmentSource',
         'status' => 'string',
         'tracking_details' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\TrackingDetails',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -84,6 +85,7 @@ class ShipmentResponse implements ModelInterface, ArrayAccess
         'source' => null,
         'status' => null,
         'tracking_details' => null,
+        'errors' => null,
     ];
 
     /**
@@ -128,6 +130,7 @@ class ShipmentResponse implements ModelInterface, ArrayAccess
         'source' => 'source',
         'status' => 'status',
         'tracking_details' => 'trackingDetails',
+        'errors' => 'errors',
     ];
 
     /**
@@ -151,6 +154,7 @@ class ShipmentResponse implements ModelInterface, ArrayAccess
         'source' => 'setSource',
         'status' => 'setStatus',
         'tracking_details' => 'setTrackingDetails', 
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -174,6 +178,7 @@ class ShipmentResponse implements ModelInterface, ArrayAccess
         'source' => 'getSource',
         'status' => 'getStatus',
         'tracking_details' => 'getTrackingDetails', 
+        'errors' => 'getErrors',
     ];
 
     /**

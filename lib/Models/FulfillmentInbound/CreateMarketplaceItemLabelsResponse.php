@@ -47,6 +47,7 @@ class CreateMarketplaceItemLabelsResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerTypes = [
         'document_downloads' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\DocumentDownloadList',
+        'errors' => '\ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ErrorList',
     ];
 
     /**
@@ -56,6 +57,7 @@ class CreateMarketplaceItemLabelsResponse implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'document_downloads' => null,
+        'errors' => null,
     ];
 
     /**
@@ -86,6 +88,7 @@ class CreateMarketplaceItemLabelsResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'document_downloads' => 'documentDownloads',
+        'errors' => 'errors',
     ];
 
     /**
@@ -95,6 +98,7 @@ class CreateMarketplaceItemLabelsResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'document_downloads' => 'setDocumentDownloads', 
+        'errors' => 'setErrors',
     ];
 
     /**
@@ -104,6 +108,7 @@ class CreateMarketplaceItemLabelsResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'document_downloads' => 'getDocumentDownloads',
+        'errors' => 'getErrors',
     ];
 
     /**
