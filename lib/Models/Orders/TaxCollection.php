@@ -209,7 +209,7 @@ class TaxCollection implements ModelInterface, ArrayAccess
         }
 
         $allowedValues = $this->getResponsiblePartyAllowableValues();
-        if (!is_null($this->container['responsible_party']) && !in_array($this->container['responsible_party'], $allowedValues, true)) {
+        if (!is_null($this->container['responsible_party']) && $this->container['responsible_party'] != '' && !in_array($this->container['responsible_party'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value for 'responsible_party', must be one of '%s'",
                 implode("', '", $allowedValues)
@@ -278,7 +278,7 @@ class TaxCollection implements ModelInterface, ArrayAccess
     public function setResponsibleParty($responsible_party)
     {
         $allowedValues = $this->getResponsiblePartyAllowableValues();
-        if (!is_null($responsible_party) && !in_array($responsible_party, $allowedValues, true)) {
+        if (!is_null($responsible_party) && $responsible_party != '' && !in_array($responsible_party, $allowedValues, true)) {
             throw new \InvalidArgumentException(sprintf("Invalid value for 'responsible_party', must be one of '%s'", implode("', '", $allowedValues)));
         }
         $this->container['responsible_party'] = $responsible_party;

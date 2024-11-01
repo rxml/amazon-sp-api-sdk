@@ -52,7 +52,7 @@ trait SellingPartnerApiRequest
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
             if ($httpBody instanceof \stdClass && 'application/json' === $headers['Content-Type']) {
-                $httpBody = Utils::jsonEncode($httpBody);
+                $httpBody = json_encode($httpBody);
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -66,7 +66,7 @@ trait SellingPartnerApiRequest
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
             } elseif ('application/json' === $headers['Content-Type']) {
-                $httpBody = Utils::jsonEncode($formParams);
+                $httpBody = json_encode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = Query::build($formParams);

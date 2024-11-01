@@ -225,12 +225,12 @@ class BoxInput implements ModelInterface, ArrayAccess
 
     public function getContentInformationSource()
     {
-        return $this->container['content_information_sSource'];
+        return $this->container['content_information_source'];
     }
 
-    public function setContentInformationSource($content_information_sSource)
+    public function setContentInformationSource($content_information_source)
     {
-        $this->container['content_information_sSource'] = $content_information_sSource;
+        $this->container['content_information_source'] = $content_information_source;
 
         return $this;
     }

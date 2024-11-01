@@ -87,7 +87,7 @@ class ConfirmPackingOptionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'operation_id' => 'operation_id',
+        'operation_id' => 'operationId',
         'errors' => 'errors',
     ];
 

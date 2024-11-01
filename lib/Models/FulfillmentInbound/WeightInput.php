@@ -87,8 +87,8 @@ class WeightInput implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'value' => 'Value',
-'unit' => 'Unit',    ];
+        'value' => 'value',
+'unit' => 'unit',    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
