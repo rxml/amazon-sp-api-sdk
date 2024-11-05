@@ -63,6 +63,8 @@ use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListItemComplianc
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\UpdateItemComplianceDetailsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\CreateMarketplaceItemLabelsResponse;
 use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\GetInboundOperationStatusResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\ListPrepDetailsResponse;
+use ClouSale\AmazonSellingPartnerAPI\Models\FulfillmentInbound\SetPrepDetailsResponse;
 
 use ClouSale\AmazonSellingPartnerAPI\ObjectSerializer;
 use GuzzleHttp\Client;
@@ -2095,6 +2097,70 @@ class FulfillmentInboundApi
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
     }
 
+    public function listPrepDetails($page_size = null, $pagination_token = null, $status = null, $sort_by = null, $sort_order = null)
+    {
+        list($response) = $this->listPrepDetailsWithHttpInfo($page_size, $pagination_token, $status, $sort_by, $sort_order);
 
+        return $response;
+    }
+
+    public function listPrepDetailsWithHttpInfo($marketplaceId = null, $mskus = null){
+        $request = $this->listPrepDetailsRequest($marketplaceId, $mskus);
+
+        return $this->sendRequest($request, ListPrepDetailsResponse::class);
+    }
+
+    protected function listPrepDetailsRequest($marketplaceId = null, $mskus = null)
+    {
+
+        if (empty($marketplaceId)) {
+            throw new \InvalidArgumentException('Missing the required parameter $marketplaceId when calling listPrepDetails');
+        }
+        if (empty($mskus)) {
+            throw new \InvalidArgumentException('Missing the required parameter $mskus when calling listPrepDetails');
+        }
+        $resourcePath = '/inbound/fba/2024-03-20/items/prepDetails';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams['marketplaceId'] = ObjectSerializer::toQueryValue($marketplaceId);
+        $queryParams['mskus'] = ObjectSerializer::toQueryValue($mskus);
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'GET', $httpBody);
+    }
+
+    public function setPrepDetails($body = null)
+    {
+        list($response) = $this->setPrepDetailsWithHttpInfo($body);
+
+        return $response;
+    }
+
+    public function setPrepDetailsWithHttpInfo($body = null)
+    {
+        $request = $this->setPrepDetailsRequest($body);
+
+        return $this->sendRequest($request, SetPrepDetailsResponse::class);
+    }
+
+    protected function setPrepDetailsRequest($body = null)
+    {
+        if (empty($body)) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling setPrepDetails');
+        }
+
+        $resourcePath = '/inbound/fba/2024-03-20/items/prepDetails';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = $body;
+        $multipart = false;
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
+    }
 
 }

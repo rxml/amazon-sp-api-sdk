@@ -401,7 +401,7 @@ class Configuration
 
     public function getAccessKey(): ?string
     {
-        return $this->accessKey;
+        return $this->accessKey ?: '';
     }
 
     public function setAccessKey(?string $accessKey): void
@@ -411,7 +411,7 @@ class Configuration
 
     public function getSecretKey(): ?string
     {
-        return $this->secretKey;
+        return $this->secretKey ?: '';
     }
 
     public function setSecretKey(?string $secretKey): void
