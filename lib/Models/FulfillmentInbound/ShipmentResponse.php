@@ -304,12 +304,12 @@ class ShipmentResponse implements ModelInterface, ArrayAccess
 
     public function getContactInformation()
     {
-        return $this->container['content_information_sSource'];
+        return $this->container['contact_information'];
     }
 
-    public function setContactInformation($content_information_sSource)
+    public function setContactInformation($contact_information)
     {
-        $this->container['content_information_sSource'] = $content_information_sSource;
+        $this->container['contact_information'] = $contact_information;
 
         return $this;
     }

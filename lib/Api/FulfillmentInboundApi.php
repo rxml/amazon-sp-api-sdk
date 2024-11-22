@@ -737,9 +737,6 @@ class FulfillmentInboundApi
         if (empty($inbound_plan_id)) {
             throw new \InvalidArgumentException('Missing the required parameter $inbound_plan_id when calling generatePlacementOptions');
         }
-        if (empty($body)) {
-            throw new \InvalidArgumentException('Missing the required parameter $body when calling generatePlacementOptions');
-        }
 
         $resourcePath = '/inbound/fba/2024-03-20/inboundPlans/{inboundPlanId}/packingOptions';
         $formParams = [];
